@@ -1,0 +1,20 @@
+Object of the game: To reach your opponent's “home row” with one of your colored dragon towers. Achieving this wins the game.
+
+1. Setup
+Each player places each tower on their “home row”, matching the tower’s color to their specific square color.
+
+2. Playing the game
+During each round, the players take turns moving a dragon tower, each attempting to be the first to place a dragon tower on a square within their opponent’s “home row” (rear row). The dragon towers are moved according to these 2 rules:
+
+Rule 1: For the first move only in any round, the player can select any of their eight dragon towers to move.
+Rule 2: For all subsequent moves in that round, each player must move the dragon tower that matches the color of the square on which their opponent’s previous piece has been placed. IE: Player one moves his yellow tower to a purple square. Player two must then move their purple tower to a valid square.
+
+3. Valid Movement:
+Rule 1: Towers must be moved in a straight line, vertically or diagonally forwards. Sideway or backward moves are NEVER allowed.
+Rule 2: Towers can be moved any number of squares, but may not pass through any square that already contains a tower (player or opponent).
+Rule 3: A tower can only move to an empty square (two towers can’t occupy the same space).
+Rule 4: A tower can move diagonally between two towers which touch corner-to-corner.
+Rule 5: A tower must be moved at least one square, assuming that it is possible to do so.
+Rule 6: If unable to move the required tower in any direction forward that player loses their turn, allowing their opponent to immediately move again.
+Rule 7: The round ends once a player moves a tower to any square within their opponent’s “home row”.
+Rule 8: In rare circumstances, there are occasions where players can find themselves in “deadlock situations”. These circumstance occur when both players have towers which are completely blocked and are unable to be moved OR have two towers that repeat moves indefinitely. In either of these situations, the player who made that final move (creating this occurrence) is considered to have lost the game.
