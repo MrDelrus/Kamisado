@@ -3,8 +3,7 @@
 mkdir -p build
 (
 cd build || exit
-cmake -DSCRIPTS_DIR=src -DASSETS_DIR=assets ..
+cmake -DASSETS_DIR=assets -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
 make
 ./Kamisado ../assets
 )
-rm -r build
