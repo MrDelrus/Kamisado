@@ -83,7 +83,3 @@ void BoardViewer::draw() {
     }
 
 }
-
-std::pair<int, int> BoardViewer::get_screen_position_(int8_t x, int8_t y) {
-
-}

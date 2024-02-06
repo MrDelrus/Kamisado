@@ -19,8 +19,6 @@ private:
 public:
     BoardViewer(SDL_Renderer* renderer);
     void draw();
-private:
-    std::pair<int, int> get_screen_position_(int8_t x, int8_t y);
 };
 
 #endif //KAMISADO_BOARD_VIEWER_H
