@@ -51,28 +51,28 @@ int main() {
         return -1;
     }
 
-    BoardViewer boardViewer;
+    BoardViewer boardViewer(renderer);
     bool isRunning = true;
+
+    // TODO (!): check docs of render functions, draw pictures on all window
 
     SDL_RenderClear(renderer);
 
-    boardViewer.draw(renderer);
+    boardViewer.draw();
 
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(2000);
+    //SDL_Delay(10 * 1000);
 
-    /*
     while (isRunning) {
 
-        //SDL_RenderClear(renderer);
+        SDL_RenderClear(renderer);
 
-        //SDL_Delay(1000 / FPS);
+        SDL_Delay(1000 / FPS);
 
-        //SDL_Delay(5000);
         //isRunning = false;
 
-    } */
+    }
 
     DeInit(0);
 
