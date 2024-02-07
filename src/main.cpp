@@ -54,19 +54,13 @@ int main() {
     BoardViewer boardViewer(renderer);
     bool isRunning = true;
 
-    // TODO (!): check docs of render functions, draw pictures on all window
-
-    SDL_RenderClear(renderer);
-
-    boardViewer.draw();
-
-    SDL_RenderPresent(renderer);
-
-    //SDL_Delay(10 * 1000);
-
     while (isRunning) {
 
         SDL_RenderClear(renderer);
+
+        boardViewer.draw();
+
+        SDL_RenderPresent(renderer);
 
         SDL_Delay(1000 / FPS);
 

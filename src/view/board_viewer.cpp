@@ -1,7 +1,5 @@
 #include "board_viewer.h"
 
-// TODO: class for local saving textures
-
 BoardViewer::BoardViewer(SDL_Renderer* renderer)
         : renderer_(renderer), pieces_images_(2, std::vector<SDL_Texture*>(8)),
           background_image_(IMG_LoadTexture(

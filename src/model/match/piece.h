@@ -25,8 +25,8 @@ enum class Player : int8_t {
 class Piece {
 private:
     Position position_;
-    Color color_;  // for view
-    Player player_;  // for view
+    Color color_;
+    Player player_;
 
 public:
     Piece(Position, Color, Player);
