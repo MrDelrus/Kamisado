@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "view/board_viewer.h"
+#include "view/arbiter_viewer.h"
 
 void DeInit(int error) {
     IMG_Quit();
@@ -51,26 +51,21 @@ int main() {
         return -1;
     }
 
-    BoardViewer boardViewer(renderer);
+    Board board;
+    ArbiterViewer arbiterViewer(WIDTH, HEIGHT, renderer);
+
     bool isRunning = true;
-
-    // TODO (!): check docs of render functions, draw pictures on all window
-
-    SDL_RenderClear(renderer);
-
-    boardViewer.draw();
-
-    SDL_RenderPresent(renderer);
-
-    //SDL_Delay(10 * 1000);
+    bool changes = true;
 
     while (isRunning) {
 
-        SDL_RenderClear(renderer);
+        if (changes) {
+            arbiterViewer.draw(board);
+        }
 
-        SDL_Delay(1000 / FPS);
+        SDL_Delay(1000);
 
-        //isRunning = false;
+        isRunning = false;
 
     }
 

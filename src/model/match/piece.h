@@ -31,11 +31,11 @@ private:
 public:
     Piece(Position, Color, Player);
 
-    Position get_position();
     void set_position(Position);
 
-    Color get_color();
-    Player get_player();
+    Position get_position() const;
+    Color get_color() const;
+    Player get_player() const;
 
 };
 

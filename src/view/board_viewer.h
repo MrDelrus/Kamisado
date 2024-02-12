@@ -3,22 +3,13 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+
 #include "../model/match/board.h"
-#include "../model/match/piece.h"
+#include "asset_manager.h"
 
 class BoardViewer {
-private:
-    const int WIDTH_ = 800;
-    const int HEIGHT_ = 600;
-
-    Board board_;
-    SDL_Renderer* renderer_;
-    std::vector<std::vector<SDL_Texture*>> pieces_images_;
-    SDL_Texture* background_image_;
-    SDL_Texture* board_image_;
 public:
-    BoardViewer(SDL_Renderer* renderer);
-    void draw();
+    void draw(const Board&, const AssetManager&, int width, int height) const;
 };
 
 #endif //KAMISADO_BOARD_VIEWER_H

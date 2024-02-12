@@ -58,6 +58,6 @@ Color Board::get_color(const Position& position) {
     return fields_[position.first][position.second];
 }
 
-const std::vector<std::vector<Piece>>& Board::get() {
+const std::vector<std::vector<Piece>>& Board::get_pieces() const {
     return pieces_;
 }

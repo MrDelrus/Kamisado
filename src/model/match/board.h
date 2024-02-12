@@ -18,7 +18,7 @@ public:
 
     Color get_color(const Position&);
 
-    const std::vector<std::vector<Piece>>& get();
+    const std::vector<std::vector<Piece>>& get_pieces() const;
 
 };
 
