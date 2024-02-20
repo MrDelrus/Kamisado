@@ -4,21 +4,25 @@
 
 #include "view/arbiter_viewer.h"
 
-void DeInit(int error) {
-    IMG_Quit();
-    SDL_Quit();
+void DeInit(int error, int step = 2) {
+    if (step >= 1) {
+        IMG_Quit();
+    }
+    if (step >= 0) {
+        SDL_Quit();
+    }
     exit(error);
 }
 
 void Init() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cerr << "Failed to initialize the SDL2 library\n";
-        DeInit(1);
+        DeInit(1, 0);
     }
 
     if (IMG_Init(IMG_INIT_PNG) == 0) {
         std::cerr << "Failed to initialize images library\n";
-        DeInit(1);
+        DeInit(1, 1);
     }
 }
 
@@ -44,13 +48,6 @@ int main() {
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Surface* window_surface = SDL_GetWindowSurface(window);
-
-    if (!window_surface) {
-        std::cerr << "Failed to get the surface from the window\n";
-        return -1;
-    }
-
     Board board;
     ArbiterViewer arbiterViewer(WIDTH, HEIGHT, renderer);
 
@@ -69,6 +66,7 @@ int main() {
 
     }
 
+    SDL_DestroyWindow(window);
     DeInit(0);
 
     return 0;

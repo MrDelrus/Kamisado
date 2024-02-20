@@ -14,10 +14,12 @@ private:
 public:
     Board();
 
+    bool is_movable(Color, Player);
     bool move(const Position&, Color, Player); // validate turn, then move piece; return result of validation
 
     Color get_color(const Position&);
 
+    std::vector<std::vector<Piece>>& get_pieces();
     const std::vector<std::vector<Piece>>& get_pieces() const;
 
 };
