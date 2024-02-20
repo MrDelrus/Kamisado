@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCES src/main.cpp
         src/model/match/piece.cpp
         src/model/match/board.cpp
-        src/control/match/arbiter.cpp
         src/view/board_viewer.cpp
         src/view/arbiter_viewer.cpp
         src/view/asset_manager.cpp
