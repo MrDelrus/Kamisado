@@ -1,23 +1,48 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
+#include "view/arbiter_viewer.h"
+
+void DeInit(int error) {
+    IMG_Quit();
+    SDL_Quit();
+    exit(error);
+}
+
+void Init() {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr << "Failed to initialize the SDL2 library\n";
+        DeInit(1);
+    }
+
+    if (IMG_Init(IMG_INIT_PNG) == 0) {
+        std::cerr << "Failed to initialize images library\n";
+        DeInit(1);
+    }
+}
+
+const int FPS = 60;
 
 int main() {
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cerr << "Failed to initialize the SDL2 library\n";
-        return -1;
-    }
+    Init();
+
+    const int WIDTH = 800;
+    const int HEIGHT = 600;
 
     SDL_Window* window = SDL_CreateWindow("Kamisado",
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
-                                          680, 480,
+                                          WIDTH, HEIGHT,
                                           0);
 
     if (!window) {
         std::cerr << "Failed to create window\n";
         return -1;
     }
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Surface* window_surface = SDL_GetWindowSurface(window);
 
@@ -26,9 +51,25 @@ int main() {
         return -1;
     }
 
-    SDL_UpdateWindowSurface(window);
+    Board board;
+    ArbiterViewer arbiterViewer(WIDTH, HEIGHT, renderer);
 
-    SDL_Delay(5000);
+    bool isRunning = true;
+    bool changes = true;
+
+    while (isRunning) {
+
+        if (changes) {
+            arbiterViewer.draw(board);
+        }
+
+        SDL_Delay(1000);
+
+        isRunning = false;
+
+    }
+
+    DeInit(0);
 
     return 0;
 }
