@@ -6,8 +6,11 @@
 
 #include "../model/match/board.h"
 #include "asset_manager.h"
+#include "piece_viewer.h"
 
 class BoardViewer {
+private:
+    PieceViewer pieceViewer_;
 public:
     void draw(const Board&, const AssetManager&, int width, int height) const;
 };

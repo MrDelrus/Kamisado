@@ -27,6 +27,23 @@ Board::Board() : pieces_(2),
     fields_ = {};
 }
 
+bool Board::is_movable(Color color, Player player) {
+    Position current = pieces_[static_cast<int8_t>(player)][static_cast<int8_t>(color)].get_position();
+
+    bool movable = false;
+
+    for (int dx = -1; dx <= 1; ++dx) {
+        int x = current.first + dx;
+        int y = current.second + (player == Player::First ? 1 : -1);
+        if (x >= 0 && x <= 7 && y >= 0 && y <= 7 && blocked_squares_.count({x, y}) == 0) {
+            movable = true;
+            break;
+        }
+    }
+
+    return movable;
+}
+
 bool Board::move(const Position& to, Color color, Player player) {
     Piece& piece = pieces_[static_cast<int8_t>(player)][static_cast<int8_t>(color)];
     Position current = piece.get_position();
@@ -56,6 +73,10 @@ bool Board::move(const Position& to, Color color, Player player) {
 
 Color Board::get_color(const Position& position) {
     return fields_[position.first][position.second];
+}
+
+std::vector<std::vector<Piece>>& Board::get_pieces() {
+    return pieces_;
 }
 
 const std::vector<std::vector<Piece>>& Board::get_pieces() const {
