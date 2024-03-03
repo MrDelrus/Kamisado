@@ -10,7 +10,8 @@ set(SOURCES src/main.cpp
         src/view/board_viewer.cpp
         src/view/arbiter_viewer.cpp
         src/view/asset_manager.cpp
-        src/view/piece_viewer.cpp)
+        src/view/piece_viewer.cpp
+        src/control/match/board_controller.cpp)
 
 find_package(SDL2 REQUIRED)
 

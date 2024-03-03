@@ -4,7 +4,7 @@ void Arbiter::choose(const Position& from) {
     if (step_ == Step::Playing || from.first != 0) {
         throw std::exception();
     }
-    current_color_ = board_.get_color(from);
+    current_color_ = boardController_.get_board().get_color(from);
     step_ = Step::Preparing;
 }
 
@@ -13,7 +13,7 @@ Arbiter::Result Arbiter::move(const Position& to) {
         throw std::exception();
     }
 
-    if (!board_.move(to, current_color_, current_player_)) {
+    if (!boardController_.move(to, current_color_, current_player_)) {
         return Result::Failed;
     }
 
@@ -32,7 +32,7 @@ Arbiter::Result Arbiter::move(const Position& to) {
 
     std::vector<std::vector<bool>> used(2, std::vector<bool>(8, false));
 
-    while (!board_.is_movable(current_color_, current_player_)) {
+    while (!boardController_.is_movable(current_color_, current_player_)) {
         if (used[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)]) {
             if (player == Player::First) {
                 return Result::Second_wins;
@@ -48,9 +48,10 @@ Arbiter::Result Arbiter::move(const Position& to) {
             current_player_ = Player::First;
         }
 
-        current_color_ = board_.get_color(board_.get_pieces()[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)].get_position());
+        Board& board = boardController_.get_board();
+        current_color_ = board.get_color(board.get_pieces()[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)].get_position());
 
-        if (board_.is_movable(current_color_, current_player_)) {
+        if (boardController_.is_movable(current_color_, current_player_)) {
             break;
         }
     }

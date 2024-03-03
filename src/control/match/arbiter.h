@@ -1,11 +1,11 @@
 #ifndef KAMISADO_ARBITER_H
 #define KAMISADO_ARBITER_H
 
-#include "../../model/match/board.h"
+#include "board_controller.h"
 
 class Arbiter {
 private:
-    Board board_;
+    BoardController boardController_;
     Color current_color_;
     Player current_player_ = Player::First;
     enum class Step {
