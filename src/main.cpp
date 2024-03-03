@@ -1,6 +1,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <chrono>
+#include <thread>
 
 #include "view/arbiter_viewer.h"
 
@@ -27,6 +29,7 @@ void Init() {
 }
 
 const int FPS = 60;
+const std::chrono::milliseconds frameDuration(1000 / FPS);
 
 int main() {
 
@@ -46,7 +49,7 @@ int main() {
         return -1;
     }
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
 
     Board board;
     ArbiterViewer arbiterViewer(WIDTH, HEIGHT, renderer);
@@ -54,17 +57,35 @@ int main() {
     bool isRunning = true;
     bool changes = true;
 
+    auto begin = std::chrono::high_resolution_clock::now();
+
+    int ticks = 0;
+
     while (isRunning) {
 
+        auto start = std::chrono::high_resolution_clock::now();
+
+        ticks += 1;
         if (changes) {
             arbiterViewer.draw(board);
         }
 
-        SDL_Delay(1000);
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-        isRunning = false;
+        std::chrono::milliseconds remaining = frameDuration - duration;
+
+        if (remaining.count() > 0) {
+            std::this_thread::sleep_for(remaining);
+        }
+
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() > 1000) {
+            isRunning = false;
+        }
 
     }
+
+    std::cerr << ticks << std::endl;
 
     SDL_DestroyWindow(window);
     DeInit(0);
