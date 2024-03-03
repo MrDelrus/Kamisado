@@ -27,50 +27,6 @@ Board::Board() : pieces_(2),
     fields_ = {};
 }
 
-bool Board::is_movable(Color color, Player player) {
-    Position current = pieces_[static_cast<int8_t>(player)][static_cast<int8_t>(color)].get_position();
-
-    bool movable = false;
-
-    for (int dx = -1; dx <= 1; ++dx) {
-        int x = current.first + dx;
-        int y = current.second + (player == Player::First ? 1 : -1);
-        if (x >= 0 && x <= 7 && y >= 0 && y <= 7 && blocked_squares_.count({x, y}) == 0) {
-            movable = true;
-            break;
-        }
-    }
-
-    return movable;
-}
-
-bool Board::move(const Position& to, Color color, Player player) {
-    Piece& piece = pieces_[static_cast<int8_t>(player)][static_cast<int8_t>(color)];
-    Position current = piece.get_position();
-
-    if (to.second == current.second or to.second < current.second and player == Player::First or
-        to.second > current.second and player == Player::Second or
-        std::abs(to.first - current.first) != std::abs(to.second - current.second)) {
-        return false;
-    }
-
-    int dx = (to.first - current.first > 0) ? 1 : (to.first == current.first) ? 0 : -1;
-    int dy = (to.second - current.first > 0) ? 1 : -1;
-
-    while (current.first += dx, current.second += dy, current != to) {
-        if (blocked_squares_.count(current) != 0) {
-            return false;
-        }
-    }
-
-    blocked_squares_.erase(piece.get_position());
-    piece.set_position(to);
-    blocked_squares_.insert(to);
-
-    return true;
-
-}
-
 Color Board::get_color(const Position& position) {
     return fields_[position.first][position.second];
 }
@@ -82,3 +38,12 @@ std::vector<std::vector<Piece>>& Board::get_pieces() {
 const std::vector<std::vector<Piece>>& Board::get_pieces() const {
     return pieces_;
 }
+
+std::set<Position>& Board::get_blocked_squares() {
+    return blocked_squares_;
+}
+
+const std::set<Position>& Board::get_blocked_squares() const {
+    return blocked_squares_;
+}
+
