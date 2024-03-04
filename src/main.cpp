@@ -4,7 +4,7 @@
 #include <chrono>
 #include <thread>
 
-#include "view/arbiter_viewer.h"
+#include "control/match/game_arbiter.h"
 
 void DeInit(int error, int step = 2) {
     if (step >= 1) {
@@ -51,11 +51,9 @@ int main() {
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
 
-    Board board;
-    ArbiterViewer arbiterViewer(WIDTH, HEIGHT, renderer);
-
     bool isRunning = true;
-    bool changes = true;
+
+    GameArbiter gameArbiter(WIDTH, HEIGHT, renderer, isRunning);
 
     auto begin = std::chrono::high_resolution_clock::now();
 
@@ -65,10 +63,9 @@ int main() {
 
         auto start = std::chrono::high_resolution_clock::now();
 
+        gameArbiter.handle();
         ticks += 1;
-        if (changes) {
-            arbiterViewer.draw(board);
-        }
+        gameArbiter.render();
 
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
@@ -77,10 +74,6 @@ int main() {
 
         if (remaining.count() > 0) {
             std::this_thread::sleep_for(remaining);
-        }
-
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() > 1000) {
-            isRunning = false;
         }
 
     }
