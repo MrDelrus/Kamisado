@@ -3,7 +3,6 @@
 
 #include "asset_manager.h"
 #include "board_viewer.h"
-#include "../control/match/board_controller.h"
 
 class ArbiterViewer {
 private:
@@ -11,10 +10,9 @@ private:
     int height_;
     AssetManager assetManager_;
     BoardViewer boardViewer_;
-    Board& board_;
 public:
-    ArbiterViewer(int, int, SDL_Renderer*, Board&);
-    void draw() const;
+    ArbiterViewer(int, int, SDL_Renderer*);
+    void draw(const Board&) const;
 };
 
 #endif //KAMISADO_ARBITER_VIEWER_H

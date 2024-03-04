@@ -1,7 +1,5 @@
 #include "arbiter.h"
 
-Arbiter::Arbiter(BoardController& boardController) : boardController_(boardController) {}
-
 void Arbiter::choose(const Position& from) {
     if (step_ == Step::Playing || from.first != 0) {
         throw std::exception();

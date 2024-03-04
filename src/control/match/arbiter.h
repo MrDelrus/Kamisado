@@ -5,7 +5,7 @@
 
 class Arbiter {
 private:
-    BoardController& boardController_;
+    BoardController boardController_;
     Color current_color_;
     Player current_player_ = Player::First;
     enum class Step {
@@ -15,8 +15,6 @@ private:
     };
     Step step_ = Step::Waiting;
 public:
-    explicit Arbiter(BoardController&);
-
     enum class Result {
         Failed,
         First_wins,
