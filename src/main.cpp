@@ -51,7 +51,6 @@ int main() {
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
 
-
     bool isRunning = true;
 
     GameArbiter gameArbiter(WIDTH, HEIGHT, renderer, isRunning);

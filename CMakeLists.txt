@@ -13,6 +13,7 @@ set(SOURCES src/main.cpp
         src/view/asset_manager.cpp
         src/view/piece_viewer.cpp
         src/control/match/board_controller.cpp
+        src/control/match/arbiter.cpp
         src/control/match/game_arbiter.cpp)
 
 find_package(SDL2 REQUIRED)
