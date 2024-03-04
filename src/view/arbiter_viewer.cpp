@@ -1,6 +1,6 @@
 #include "arbiter_viewer.h"
 
-ArbiterViewer::ArbiterViewer(int width, int height, SDL_Renderer* renderer, Board& board) :
+ArbiterViewer::ArbiterViewer(int width, int height, SDL_Renderer* renderer, const Board& board) :
         width_(width), height_(height), assetManager_(renderer), board_(board) {}
 
 void ArbiterViewer::draw() const {

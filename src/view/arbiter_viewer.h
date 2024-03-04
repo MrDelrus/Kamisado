@@ -11,9 +11,9 @@ private:
     int height_;
     AssetManager assetManager_;
     BoardViewer boardViewer_;
-    Board& board_;
+    const Board& board_;
 public:
-    ArbiterViewer(int, int, SDL_Renderer*, Board&);
+    ArbiterViewer(int, int, SDL_Renderer*, const Board&);
     void draw() const;
 };
 
