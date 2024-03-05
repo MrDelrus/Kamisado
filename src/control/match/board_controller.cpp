@@ -37,7 +37,7 @@ bool BoardController::move(const Position& to, Color color, Player player) {
     Position current = piece.get_position();
 
     if (to.second == current.second || to.second < current.second && player == Player::First || to.second > current.second
-        && player == Player::Second || std::abs(to.first - current.first) != std::abs(to.second - current.second)) {
+        && player == Player::Second || std::abs(to.first - current.first) != 0 && std::abs(to.first - current.first) != std::abs(to.second - current.second)) {
         return false;
     }
 

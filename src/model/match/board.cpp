@@ -23,12 +23,10 @@ Board::Board() : pieces_(2),
         pieces_[static_cast<int8_t>(Player::Second)].emplace_back(Position(7 - i, 7), color, Player::Second);
         blocked_squares_.emplace(7 - i, 7);
     }
-
-    fields_ = {};
 }
 
 Color Board::get_color(const Position& position) {
-    return fields_[position.first][position.second];
+    return fields_[position.second][position.first];
 }
 
 std::vector<std::vector<Piece>>& Board::get_pieces() {

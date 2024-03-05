@@ -73,7 +73,7 @@ int main() {
         std::chrono::milliseconds remaining = frameDuration - duration;
 
         if (remaining.count() > 0) {
-            std::this_thread::sleep_for(remaining);
+            std::this_thread::sleep_for(remaining); // TODO: compare with SDL_Delay and maybe change it
         }
 
     }
