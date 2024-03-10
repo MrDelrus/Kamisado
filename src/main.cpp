@@ -35,8 +35,8 @@ int main() {
 
     Init();
 
-    const int WIDTH = 800;
-    const int HEIGHT = 600;
+    const int WIDTH = 256 * 4;
+    const int HEIGHT = 256 * 3;
 
     SDL_Window* window = SDL_CreateWindow("Kamisado",
                                           SDL_WINDOWPOS_CENTERED,

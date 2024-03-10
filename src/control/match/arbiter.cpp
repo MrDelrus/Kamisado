@@ -2,20 +2,19 @@
 
 Arbiter::Arbiter(BoardController& boardController) : boardController_(boardController) {}
 
+Arbiter::Step Arbiter::get_step() {
+    return step_;
+}
+
 void Arbiter::choose(const Position& from) {
-    if (step_ == Step::Playing || from.first != 0) {
-        throw std::exception();
+    if (step_ != Step::Playing && from.second == 0) {
+        current_color_ = boardController_.get_board().get_color(from);
+        step_ = Step::Preparing;
     }
-    current_color_ = boardController_.get_board().get_color(from);
-    step_ = Step::Preparing;
 }
 
 Arbiter::Result Arbiter::move(const Position& to) {
-    if (step_ == Step::Waiting) {
-        throw std::exception();
-    }
-
-    if (!boardController_.move(to, current_color_, current_player_)) {
+    if (step_ == Step::Waiting || !boardController_.move(to, current_color_, current_player_)) {
         return Result::Failed;
     }
 
@@ -34,6 +33,14 @@ Arbiter::Result Arbiter::move(const Position& to) {
 
     std::vector<std::vector<bool>> used(2, std::vector<bool>(8, false));
 
+    if (current_player_ == Player::First) {
+        current_player_ = Player::Second;
+    } else {
+        current_player_ = Player::First;
+    }
+
+    current_color_ = boardController_.get_board().get_color(to);
+
     while (!boardController_.is_movable(current_color_, current_player_)) {
         if (used[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)]) {
             if (player == Player::First) {
@@ -44,18 +51,15 @@ Arbiter::Result Arbiter::move(const Position& to) {
         }
         used[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)] = true;
 
+        Board& board = boardController_.get_board();
+        current_color_ = board.get_color(board.get_pieces()[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)].get_position());
+
         if (current_player_ == Player::First) {
             current_player_ = Player::Second;
         } else {
             current_player_ = Player::First;
         }
 
-        Board& board = boardController_.get_board();
-        current_color_ = board.get_color(board.get_pieces()[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)].get_position());
-
-        if (boardController_.is_movable(current_color_, current_player_)) {
-            break;
-        }
     }
 
     if (current_player_ == Player::First) {

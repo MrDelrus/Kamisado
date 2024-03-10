@@ -11,8 +11,8 @@ void BoardViewer::draw(const Board& board, const AssetManager& assetManager, int
     SDL_RenderCopy(assetManager.get_renderer(), assetManager.get_background_image(), NULL, &background_rectangle);
 
     SDL_Rect board_rectangle;
-    board_rectangle.x = height / 16;
-    board_rectangle.y = width / 16;
+    board_rectangle.x = width / 16;
+    board_rectangle.y = height / 16;
     board_rectangle.w = height - board_rectangle.y * 2;
     board_rectangle.h = board_rectangle.w;
 

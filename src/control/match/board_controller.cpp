@@ -42,7 +42,7 @@ bool BoardController::move(const Position& to, Color color, Player player) {
     }
 
     int dx = (to.first - current.first > 0) ? 1 : (to.first == current.first) ? 0 : -1;
-    int dy = (to.second - current.first > 0) ? 1 : -1;
+    int dy = (to.second - current.second > 0) ? 1 : -1;
 
     while (current.first += dx, current.second += dy, current != to) {
         if (blocked_squares.count(current) != 0) {

@@ -3,6 +3,7 @@
 
 #include "arbiter.h"
 #include "../../view/arbiter_viewer.h"
+#include "click_controller.h"
 
 class GameArbiter {
 private:
@@ -11,6 +12,7 @@ private:
     BoardController boardController_;
     Arbiter arbiter_;
     ArbiterViewer arbiterViewer_;
+    ClickController clickController_;
 public:
     GameArbiter(int, int, SDL_Renderer*, bool&);
     void handle();
