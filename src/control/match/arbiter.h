@@ -4,15 +4,16 @@
 #include "board_controller.h"
 
 class Arbiter {
-private:
-    BoardController& boardController_;
-    Color current_color_;
-    Player current_player_ = Player::First;
+public:
     enum class Step {
         Waiting,
         Preparing,
         Playing
     };
+private:
+    BoardController& boardController_;
+    Color current_color_;
+    Player current_player_ = Player::First;
     Step step_ = Step::Waiting;
 public:
     explicit Arbiter(BoardController&);
@@ -25,6 +26,7 @@ public:
         Second_turn
     };
 
+    Step get_step();
     void choose(const Position&);
     Result move(const Position&);
 

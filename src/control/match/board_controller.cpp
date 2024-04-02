@@ -33,6 +33,10 @@ bool BoardController::move(const Position& to, Color color, Player player) {
     std::vector<std::vector<Piece>>& pieces = board_.get_pieces();
     std::set<Position>& blocked_squares = board_.get_blocked_squares();
 
+    if (blocked_squares.count(to) != 0) {
+        return false;
+    }
+
     Piece& piece = pieces[static_cast<int8_t>(player)][static_cast<int8_t>(color)];
     Position current = piece.get_position();
 
@@ -42,7 +46,7 @@ bool BoardController::move(const Position& to, Color color, Player player) {
     }
 
     int dx = (to.first - current.first > 0) ? 1 : (to.first == current.first) ? 0 : -1;
-    int dy = (to.second - current.first > 0) ? 1 : -1;
+    int dy = (to.second - current.second > 0) ? 1 : -1;
 
     while (current.first += dx, current.second += dy, current != to) {
         if (blocked_squares.count(current) != 0) {
