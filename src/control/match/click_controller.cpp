@@ -2,7 +2,7 @@
 
 ClickController::ClickController(int width, int height) : width_(width), height_(height) {}
 
-Position ClickController::get_position(int x_click, int y_click) {
+Position ClickController::get_position(int x_click, int y_click) const {
 
     int x = width_ / 16;
     int y = height_ / 16;

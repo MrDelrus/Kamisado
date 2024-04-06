@@ -10,9 +10,14 @@
 
 class BoardViewer {
 private:
-    PieceViewer pieceViewer_;
+    const int width_;
+    const int height_;
+    const Board& board_;
+    const AssetManager& assetManager_;
+    const PieceViewer& pieceViewer_;
 public:
-    void draw(const Board&, const AssetManager&, int width, int height) const;
+    BoardViewer(int width, int height, const Board&, const AssetManager&, const PieceViewer&);
+    void draw() const;
 };
 
 #endif //KAMISADO_BOARD_VIEWER_H

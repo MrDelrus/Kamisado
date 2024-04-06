@@ -1,6 +1,8 @@
 #include "board_controller.h"
 #include <valarray>
 
+BoardController::BoardController(Board& board) : board_(board) {}
+
 Board& BoardController::get_board() {
     return board_;
 }

@@ -10,7 +10,7 @@ private:
 public:
     ClickController(int, int);
 
-    Position get_position(int, int);
+    Position get_position(int, int) const;
 
 };
 
