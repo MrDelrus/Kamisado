@@ -4,19 +4,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "../model/match/board.h"
 #include "asset_manager.h"
-#include "piece_viewer.h"
 
 class BoardViewer {
 private:
-    const int width_;
-    const int height_;
-    const Board& board_;
     const AssetManager& assetManager_;
-    const PieceViewer& pieceViewer_;
+    const SDL_Rect& board_rectangle_;
 public:
-    BoardViewer(int width, int height, const Board&, const AssetManager&, const PieceViewer&);
+    BoardViewer(const AssetManager&, const SDL_Rect& board_rectangle);
     void draw() const;
 };
 

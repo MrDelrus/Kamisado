@@ -2,19 +2,17 @@
 #define KAMISADO_GAME_ARBITER_H
 
 #include "arbiter.h"
-#include "../../view/arbiter_viewer.h"
-#include "click_controller.h"
+#include "../../view/match/arbiter_viewer.h"
 
 class GameArbiter {
 private:
-    BoardController& boardController_;
     Arbiter& arbiter_;
     const ArbiterViewer& arbiterViewer_;
-    const ClickController& clickController_;
+    const SDL_Rect& board_rectangle_;
     bool& isRunning_;
     bool isChanged_ = true;
 public:
-    GameArbiter(BoardController&, Arbiter&, const ArbiterViewer&, const ClickController&, bool&);
+    GameArbiter(Arbiter&, const ArbiterViewer&, const SDL_Rect& board_rectangle, bool&);
     void handle();
     void render();
 };
