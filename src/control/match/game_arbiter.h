@@ -7,14 +7,14 @@
 
 class GameArbiter {
 private:
+    BoardController& boardController_;
+    Arbiter& arbiter_;
+    const ArbiterViewer& arbiterViewer_;
+    const ClickController& clickController_;
     bool& isRunning_;
-    bool isChanged;
-    BoardController boardController_;
-    Arbiter arbiter_;
-    ArbiterViewer arbiterViewer_;
-    ClickController clickController_;
+    bool isChanged_ = true;
 public:
-    GameArbiter(int, int, SDL_Renderer*, bool&);
+    GameArbiter(BoardController&, Arbiter&, const ArbiterViewer&, const ClickController&, bool&);
     void handle();
     void render();
 };

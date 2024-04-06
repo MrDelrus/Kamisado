@@ -53,7 +53,17 @@ int main() {
 
     bool isRunning = true;
 
-    GameArbiter gameArbiter(WIDTH, HEIGHT, renderer, isRunning);
+    Board board;
+    BoardController boardController(board);
+
+    AssetManager assetManager(renderer);
+    PieceViewer pieceViewer(assetManager);
+    BoardViewer boardViewer(WIDTH, HEIGHT, board, assetManager, pieceViewer);
+    ArbiterViewer arbiterViewer(WIDTH, HEIGHT, assetManager, boardViewer, board);
+
+    Arbiter arbiter(boardController);
+    ClickController clickController(WIDTH, HEIGHT);
+    GameArbiter gameArbiter(boardController, arbiter, arbiterViewer, clickController, isRunning);
 
     auto begin = std::chrono::high_resolution_clock::now();
 
@@ -73,12 +83,12 @@ int main() {
         std::chrono::milliseconds remaining = frameDuration - duration;
 
         if (remaining.count() > 0) {
-            std::this_thread::sleep_for(remaining); // TODO: compare with SDL_Delay and maybe change it
+            std::this_thread::sleep_for(remaining);
         }
 
     }
 
-    std::cerr << ticks << std::endl;
+    std::cerr << "Frames count : " <<  ticks << std::endl;
 
     SDL_DestroyWindow(window);
     DeInit(0);

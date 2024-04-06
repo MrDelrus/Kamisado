@@ -1,9 +1,10 @@
 #include "game_arbiter.h"
 #include <iostream>
 
-GameArbiter::GameArbiter(int width, int height, SDL_Renderer* renderer, bool& isRunning) : isRunning_(isRunning)
-        , arbiter_(boardController_), arbiterViewer_(width, height, renderer, boardController_.get_board())
-        , clickController_(width, height) {}
+GameArbiter::GameArbiter(BoardController& boardController, Arbiter& arbiter, const ArbiterViewer& arbiterViewer,
+                         const ClickController& clickController, bool& isRunning) : boardController_(boardController),
+                         arbiter_(arbiter), arbiterViewer_(arbiterViewer), clickController_(clickController),
+                         isRunning_(isRunning) {}
 
 void GameArbiter::handle() {
     SDL_Event e;
@@ -27,7 +28,7 @@ void GameArbiter::handle() {
                     } else {
                         Arbiter::Result result = arbiter_.move(position);
                         if (result != Arbiter::Result::Failed) {
-                            isChanged = true;
+                            isChanged_ = true;
                             if (result == Arbiter::Result::First_wins) {
                                 std::cout << "FIRST WON" << std::endl;
                                 isRunning_ = false;
@@ -44,8 +45,8 @@ void GameArbiter::handle() {
 }
 
 void GameArbiter::render() {
-    if (isChanged) {
-        isChanged = false;
+    if (isChanged_) {
+        isChanged_ = false;
         arbiterViewer_.draw();
     }
 }

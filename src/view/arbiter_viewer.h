@@ -9,11 +9,11 @@ class ArbiterViewer {
 private:
     int width_;
     int height_;
-    AssetManager assetManager_;
-    BoardViewer boardViewer_;
+    const AssetManager& assetManager_;
+    const BoardViewer& boardViewer_;
     const Board& board_;
 public:
-    ArbiterViewer(int, int, SDL_Renderer*, const Board&);
+    ArbiterViewer(int, int, const AssetManager&, const BoardViewer&, const Board&);
     void draw() const;
 };
 

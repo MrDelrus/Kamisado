@@ -1,6 +1,8 @@
 #include "piece_viewer.h"
 
-void PieceViewer::draw(const Piece& piece, SDL_Renderer* renderer, SDL_Texture* piece_image, const SDL_Rect& board_rectangle) const {
+PieceViewer::PieceViewer(const AssetManager& assetManager) : assetManager_(assetManager) {}
+
+void PieceViewer::draw(const Piece& piece, const SDL_Rect& board_rectangle) const {
 
     SDL_Rect piece_rectangle;
 
@@ -9,6 +11,8 @@ void PieceViewer::draw(const Piece& piece, SDL_Renderer* renderer, SDL_Texture* 
     piece_rectangle.w = board_rectangle.w / 8;
     piece_rectangle.h = board_rectangle.h / 8;
 
-    SDL_RenderCopy(renderer, piece_image, nullptr, &piece_rectangle);
+    SDL_Texture* piece_image = assetManager_.get_pieces_images()[static_cast<int8_t>(piece.get_player())][static_cast<int8_t>(piece.get_color())];
+
+    SDL_RenderCopy(assetManager_.get_renderer(), piece_image, nullptr, &piece_rectangle);
 
 }

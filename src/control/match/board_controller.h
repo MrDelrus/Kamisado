@@ -5,8 +5,10 @@
 
 class BoardController {
 private:
-    Board board_;
+    Board& board_;
 public:
+    BoardController(Board&);
+
     Board& get_board();
     const Board& get_board() const;
 
