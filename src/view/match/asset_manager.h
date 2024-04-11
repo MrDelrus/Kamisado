@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "../model/match/piece.h"
+#include "../../model/match/piece.h"
 
 #include <vector>
 

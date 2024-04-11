@@ -7,14 +7,14 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCES src/main.cpp
         src/model/match/piece.cpp
         src/model/match/board.cpp
-        src/view/board_viewer.cpp
-        src/view/arbiter_viewer.cpp
-        src/view/asset_manager.cpp
-        src/view/piece_viewer.cpp
+        src/view/match/board_viewer.cpp
+        src/view/match/arbiter_viewer.cpp
+        src/view/match/asset_manager.cpp
+        src/view/match/piece_viewer.cpp
         src/control/match/board_controller.cpp
         src/control/match/arbiter.cpp
         src/control/match/game_arbiter.cpp
-        src/control/match/click_controller.cpp)
+)
 
 find_package(SDL2 REQUIRED)
 

@@ -2,18 +2,19 @@
 #define KAMISADO_ARBITER_VIEWER_H
 
 #include "asset_manager.h"
+#include "../../model/match/board.h"
 #include "board_viewer.h"
-#include "../control/match/board_controller.h"
+#include "piece_viewer.h"
 
 class ArbiterViewer {
 private:
-    int width_;
-    int height_;
+    const Board& board_;
     const AssetManager& assetManager_;
     const BoardViewer& boardViewer_;
-    const Board& board_;
+    const PieceViewer& pieceViewer_;
+    const SDL_Rect& screen_rectangle_;
 public:
-    ArbiterViewer(int, int, const AssetManager&, const BoardViewer&, const Board&);
+    ArbiterViewer(const Board&, const AssetManager&, const BoardViewer&, const PieceViewer&, const SDL_Rect&);
     void draw() const;
 };
 

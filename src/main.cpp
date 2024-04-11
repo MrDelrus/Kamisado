@@ -28,15 +28,28 @@ void Init() {
     }
 }
 
+const int WIDTH = 256 * 4;
+const int HEIGHT = 256 * 3;
+
 const int FPS = 60;
 const std::chrono::milliseconds frameDuration(1000 / FPS);
+
 
 int main() {
 
     Init();
 
-    const int WIDTH = 256 * 4;
-    const int HEIGHT = 256 * 3;
+    SDL_Rect screen_rectangle;
+    screen_rectangle.x = 0;
+    screen_rectangle.y = 0;
+    screen_rectangle.w = WIDTH;
+    screen_rectangle.h = HEIGHT;
+
+    SDL_Rect board_rectangle;
+    board_rectangle.x = WIDTH / 16;
+    board_rectangle.y = HEIGHT / 16;
+    board_rectangle.w = HEIGHT - board_rectangle.y * 2;
+    board_rectangle.h = board_rectangle.w;
 
     SDL_Window* window = SDL_CreateWindow("Kamisado",
                                           SDL_WINDOWPOS_CENTERED,
@@ -57,13 +70,12 @@ int main() {
     BoardController boardController(board);
 
     AssetManager assetManager(renderer);
-    PieceViewer pieceViewer(assetManager);
-    BoardViewer boardViewer(WIDTH, HEIGHT, board, assetManager, pieceViewer);
-    ArbiterViewer arbiterViewer(WIDTH, HEIGHT, assetManager, boardViewer, board);
+    PieceViewer pieceViewer(assetManager, board_rectangle);
+    BoardViewer boardViewer(assetManager, board_rectangle);
+    ArbiterViewer arbiterViewer(board, assetManager, boardViewer, pieceViewer, screen_rectangle);
 
     Arbiter arbiter(boardController);
-    ClickController clickController(WIDTH, HEIGHT);
-    GameArbiter gameArbiter(boardController, arbiter, arbiterViewer, clickController, isRunning);
+    GameArbiter gameArbiter(arbiter, arbiterViewer, board_rectangle, isRunning);
 
     auto begin = std::chrono::high_resolution_clock::now();
 
