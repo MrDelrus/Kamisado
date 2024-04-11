@@ -11,6 +11,9 @@ private:
     const SDL_Rect& board_rectangle_;
     bool& isRunning_;
     bool isChanged_ = true;
+
+private:
+    void handle_mouse_click_();
 public:
     GameArbiter(Arbiter&, const ArbiterViewer&, const SDL_Rect& board_rectangle, bool&);
     void handle();
