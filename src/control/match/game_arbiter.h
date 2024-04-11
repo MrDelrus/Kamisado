@@ -14,6 +14,8 @@ private:
 
 private:
     void handle_mouse_click_();
+    Arbiter::Result move_to_position_(const Position&);
+    void handle_move_result_(const Arbiter::Result&);
 public:
     GameArbiter(Arbiter&, const ArbiterViewer&, const SDL_Rect& board_rectangle, bool&);
     void handle();
