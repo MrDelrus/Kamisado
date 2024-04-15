@@ -11,7 +11,7 @@ const Board& BoardController::get_board() const {
     return board_;
 }
 
-bool BoardController::is_movable(Color color, Player player) {
+bool BoardController::is_movable(Color color, Player player) const {
     const std::vector<std::vector<Piece>>& pieces = board_.get_pieces();
     const std::set<Position>& blocked_squares = board_.get_blocked_squares();
 
@@ -29,6 +29,31 @@ bool BoardController::is_movable(Color color, Player player) {
     }
 
     return movable;
+}
+
+std::vector<Position> BoardController::get_available_squares(Color color, Player player) const {
+
+    std::vector<Position> available_squares;
+
+    const std::vector<std::vector<Piece>>& pieces = board_.get_pieces();
+    const std::set<Position>& blocked_squares = board_.get_blocked_squares();
+
+    Position current = pieces[static_cast<int8_t>(player)][static_cast<int8_t>(color)].get_position();
+
+    int dy = (player == Player::First ? 1 : -1);
+
+    for (int dx = -1; dx <= 1; ++dx) {
+        int x = current.first + dx;
+        int y = current.second + dy;
+        while (x >= 0 && x <= 7 && y >= 0 && y <= 7 && blocked_squares.count({x, y}) == 0) {
+            available_squares.emplace_back(x, y);
+            x += dx;
+            y += dy;
+        }
+    }
+
+    return available_squares;
+
 }
 
 bool BoardController::move(const Position& to, Color color, Player player) {

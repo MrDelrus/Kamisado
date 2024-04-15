@@ -27,15 +27,19 @@ void GameArbiter::handle() {
             Position position = {(x - board_rectangle_.x) / (board_rectangle_.w / 8),
                                  (board_rectangle_.y + board_rectangle_.h - y) / (board_rectangle_.h / 8)};
 
+            isChanged_ = true;
+
             if (arbiter_.get_step() == Arbiter::Step::Waiting) {
                 arbiter_.choose(position);
             } else {
                 if (arbiter_.get_step() == Arbiter::Step::Preparing && position.second == 0) {
                     arbiter_.choose(position);
                 } else {
+                    Position current_position = arbiter_.get_current_position();
                     Arbiter::Result result = arbiter_.move(position);
                     if (result != Arbiter::Result::Failed) {
-                        isChanged_ = true;
+                        last_move_to_ = position;
+                        last_move_from_ = current_position;
                         if (result == Arbiter::Result::First_wins) {
                             std::cout << "FIRST WON" << std::endl;
                             isRunning_ = false;
@@ -53,6 +57,10 @@ void GameArbiter::handle() {
 void GameArbiter::render() {
     if (isChanged_) {
         isChanged_ = false;
-        arbiterViewer_.draw();
+        if (arbiter_.get_step() == Arbiter::Step::Waiting) {
+            arbiterViewer_.draw(std::vector<Position>(), {-1, -1});
+        } else {
+            arbiterViewer_.draw(arbiter_.get_available_squares(), last_move_to_, last_move_from_);
+        }
     }
 }

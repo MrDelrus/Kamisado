@@ -11,6 +11,8 @@ private:
     const SDL_Rect& board_rectangle_;
     bool& isRunning_;
     bool isChanged_ = true;
+    Position last_move_to_ = {-1, -1};
+    Position last_move_from_ = {-1, -1};
 public:
     GameArbiter(Arbiter&, const ArbiterViewer&, const SDL_Rect& board_rectangle, bool&);
     void handle();

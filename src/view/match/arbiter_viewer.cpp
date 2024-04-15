@@ -1,17 +1,33 @@
 #include "arbiter_viewer.h"
 
 ArbiterViewer::ArbiterViewer(const Board& board, const AssetManager& assetManager, const BoardViewer& boardViewer,
-                             const PieceViewer& pieceViewer, const SDL_Rect& screen_rectangle)
-                             : board_(board), assetManager_(assetManager), boardViewer_(boardViewer),
-                             pieceViewer_(pieceViewer), screen_rectangle_(screen_rectangle) {}
+                             const PieceViewer& pieceViewer, const SquareFiller& squareFiller,
+                             const SDL_Rect& screen_rectangle) : board_(board), assetManager_(assetManager),
+                             boardViewer_(boardViewer), pieceViewer_(pieceViewer), squareFiller_(squareFiller),
+                             screen_rectangle_(screen_rectangle) {}
 
-void ArbiterViewer::draw() const {
+void ArbiterViewer::draw(const std::vector<Position>& available_squares, Position last_move_to, Position last_move_from) const {
 
-    SDL_RenderClear(assetManager_.get_renderer());
+    SDL_Renderer* renderer = assetManager_.get_renderer();
 
-    SDL_RenderCopy(assetManager_.get_renderer(), assetManager_.get_background_image(), nullptr, &screen_rectangle_);
+    SDL_RenderClear(renderer);
+
+    SDL_RenderCopy(renderer, assetManager_.get_background_image(), nullptr, &screen_rectangle_);
 
     boardViewer_.draw();
+
+    /*
+    if (last_move_to.first >= 0 && last_move_to.first <= 7 && last_move_to.second >= 0 && last_move_to.second <= 7) {
+        squareFiller_.draw(last_move_to, 255, 255, 0, 127);
+    }
+
+    if (last_move_from.first >= 0 && last_move_from.first <= 7 && last_move_from.second >= 0 && last_move_from.second <= 7) {
+        squareFiller_.draw(last_move_from, 255, 255, 0, 127);
+    } */
+
+    for (auto position : available_squares) {
+        squareFiller_.draw(position, 255, 255, 255, 127);
+    }
 
     auto pieces = board_.get_pieces();
 
@@ -21,5 +37,6 @@ void ArbiterViewer::draw() const {
         }
     }
 
-    SDL_RenderPresent(assetManager_.get_renderer());
+    SDL_RenderPresent(renderer);
+
 }

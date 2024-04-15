@@ -69,3 +69,16 @@ Arbiter::Result Arbiter::move(const Position& to) {
     }
 
 }
+
+std::vector<Position> Arbiter::get_available_squares() const {
+
+    return boardController_.get_available_squares(current_color_, current_player_);
+
+}
+
+Position Arbiter::get_current_position() const {
+    if (step_ == Step::Waiting) {
+        return {-1, -1};
+    }
+    return boardController_.get_board().get_pieces()[static_cast<int8_t>(current_player_)][static_cast<int8_t>(current_color_)].get_position();
+}

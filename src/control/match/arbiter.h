@@ -30,6 +30,9 @@ public:
     void choose(const Position&);
     Result move(const Position&);
 
+    std::vector<Position> get_available_squares() const;
+    Position get_current_position() const;
+
 };
 
 #endif //KAMISADO_ARBITER_H
