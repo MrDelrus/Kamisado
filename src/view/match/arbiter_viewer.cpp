@@ -26,7 +26,7 @@ void ArbiterViewer::draw(const std::vector<Position>& available_squares, Positio
     } */
 
     for (auto position : available_squares) {
-        squareFiller_.draw(position, 255, 255, 255, 127);
+        squareFiller_.draw(position, 255, 255, 255, 100);
     }
 
     auto pieces = board_.get_pieces();
