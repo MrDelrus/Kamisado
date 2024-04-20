@@ -14,6 +14,7 @@ set(SOURCES src/main.cpp
         src/control/match/board_controller.cpp
         src/control/match/arbiter.cpp
         src/control/match/game_arbiter.cpp
+        src/view/match/square_filler.cpp
 )
 
 find_package(SDL2 REQUIRED)

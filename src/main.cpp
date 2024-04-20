@@ -63,6 +63,7 @@ int main() {
     }
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     bool isRunning = true;
 
@@ -70,11 +71,13 @@ int main() {
     BoardController boardController(board);
 
     AssetManager assetManager(renderer);
+    SquareFiller squareFiller(renderer, board_rectangle);
     PieceViewer pieceViewer(assetManager, board_rectangle);
     BoardViewer boardViewer(assetManager, board_rectangle);
-    ArbiterViewer arbiterViewer(board, assetManager, boardViewer, pieceViewer, screen_rectangle);
 
     Arbiter arbiter(boardController);
+    ArbiterViewer arbiterViewer(arbiter, assetManager, boardViewer, pieceViewer, squareFiller, screen_rectangle);
+
     GameArbiter gameArbiter(arbiter, arbiterViewer, board_rectangle, isRunning);
 
     auto begin = std::chrono::high_resolution_clock::now();
