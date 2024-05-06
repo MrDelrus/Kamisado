@@ -9,7 +9,7 @@ private:
     bool isRunning_;
     Board board_;
     BoardController boardController_;
-    AssetManager assetManager_;
+    const AssetManager& assetManager_;
     SquareFiller squareFiller_;
     PieceViewer pieceViewer_;
     BoardViewer boardViewer_;
@@ -18,7 +18,7 @@ private:
     GameArbiter gameArbiter_;
     State next_state = State::TestMatch;
 public:
-    TestMatchScenery(SDL_Renderer* renderer, const SDL_Rect& board_rectangle, const SDL_Rect& screen_rectangle);
+    TestMatchScenery(const AssetManager&, const SDL_Rect&, const SDL_Rect&);
 
     void update() override;
     void render() const override;

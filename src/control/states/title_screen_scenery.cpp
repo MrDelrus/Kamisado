@@ -1,11 +1,8 @@
-//
-// Created by mrdelrus on 06.05.24.
-//
-
 #include "title_screen_scenery.h"
+#include <iostream>
 
-TitleScreenScenery::TitleScreenScenery(SDL_Renderer* renderer, const SDL_Rect& screen_rectangle) : renderer_(renderer),
-        screen_rectangle_(screen_rectangle) {}
+TitleScreenScenery::TitleScreenScenery(const AssetManager& assetManager, const SDL_Rect& screen_rectangle) :
+        assetManager_(assetManager), screen_rectangle_(screen_rectangle) {}
 
 void TitleScreenScenery::update() {
     SDL_Event event;
@@ -23,10 +20,12 @@ void TitleScreenScenery::update() {
 }
 
 void TitleScreenScenery::render() const {
-    SDL_RenderClear(renderer_);
-    SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer_, &screen_rectangle_);
-    SDL_RenderPresent(renderer_);
+    SDL_Renderer* renderer = assetManager_.get_renderer();
+    SDL_RenderClear(renderer);
+    std::cerr << "Rendering title screen\t";
+    SDL_RenderCopy(renderer, assetManager_.get_title_screen_image(), nullptr, &screen_rectangle_);
+    std::cerr << "Done\n";
+    SDL_RenderPresent(renderer);
 }
 
 State TitleScreenScenery::get_current_state() const {

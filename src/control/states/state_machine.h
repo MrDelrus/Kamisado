@@ -8,13 +8,13 @@
 
 class StateMachine {
 private:
-    SDL_Renderer* renderer_;
+    const AssetManager& assetManager_;
     const int WIDTH_;
     const int HEIGHT_;
     State current_state_;
     GameState* current_scenery_ = nullptr;
 public:
-    StateMachine(SDL_Renderer* renderer, int width, int height);
+    StateMachine(const AssetManager&, int, int);
     void update();
     void render() const;
     bool running() const;

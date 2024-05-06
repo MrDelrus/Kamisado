@@ -1,10 +1,11 @@
 #include "test_match_scenery.h"
 
-TestMatchScenery::TestMatchScenery(SDL_Renderer* renderer, const SDL_Rect& board_rectangle, const SDL_Rect& screen_rectangle)
-        : isRunning_(true), boardController_(board_), assetManager_(renderer), squareFiller_(renderer, board_rectangle),
-        pieceViewer_(assetManager_, board_rectangle), boardViewer_(assetManager_, board_rectangle),
-        arbiter_(boardController_), arbiterViewer_(arbiter_, assetManager_, boardViewer_, pieceViewer_, squareFiller_,
-        screen_rectangle), gameArbiter_(arbiter_, arbiterViewer_, board_rectangle, isRunning_) {}
+TestMatchScenery::TestMatchScenery(const AssetManager& assetManager, const SDL_Rect& board_rectangle,
+        const SDL_Rect& screen_rectangle) : isRunning_(true), boardController_(board_), assetManager_(assetManager),
+        squareFiller_(assetManager_.get_renderer(), board_rectangle), pieceViewer_(assetManager_, board_rectangle),
+        boardViewer_(assetManager_, board_rectangle), arbiter_(boardController_),
+        arbiterViewer_(arbiter_, assetManager_, boardViewer_, pieceViewer_, squareFiller_, screen_rectangle),
+        gameArbiter_(arbiter_, arbiterViewer_, board_rectangle, isRunning_) {}
 
 void TestMatchScenery::update() {
     SDL_Event event;

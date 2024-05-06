@@ -2,14 +2,15 @@
 #define KAMISADO_TITLE_SCREEN_SCENERY_H
 
 #include "game_state.h"
+#include "../../view/match/asset_manager.h"
 
 class TitleScreenScenery : public GameState {
 private:
-    SDL_Renderer* renderer_;
+    const AssetManager& assetManager_;
     const SDL_Rect& screen_rectangle_;
     State next_state = State::TitleScreen;
 public:
-    TitleScreenScenery(SDL_Renderer* renderer, const SDL_Rect& screen_rectangle);
+    TitleScreenScenery(const AssetManager&, const SDL_Rect&);
 
     void update() override;
     void render() const override;

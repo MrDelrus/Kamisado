@@ -2,8 +2,8 @@
 #include "state_machine.h"
 
 
-StateMachine::StateMachine(SDL_Renderer* renderer, int width, int height) : renderer_(renderer), WIDTH_(width),
-        HEIGHT_(height), current_state_(State::TitleScreen) {
+StateMachine::StateMachine(const AssetManager& assetManager, int width, int height) : assetManager_(assetManager),
+        WIDTH_(width), HEIGHT_(height), current_state_(State::TitleScreen) {
     SDL_Rect screen_rectangle;
     screen_rectangle.x = 0;
     screen_rectangle.y = 0;
@@ -11,7 +11,7 @@ StateMachine::StateMachine(SDL_Renderer* renderer, int width, int height) : rend
     screen_rectangle.h = HEIGHT_;
 
     std::cerr << "Current State : TitleScreen\n";
-    current_scenery_ = new TitleScreenScenery(renderer_, screen_rectangle);
+    current_scenery_ = new TitleScreenScenery(assetManager_, screen_rectangle);
 }
 
 void StateMachine::update() {
@@ -41,7 +41,7 @@ void StateMachine::update() {
             board_rectangle.h = board_rectangle.w;
 
             current_state_ = State::TestMatch;
-            current_scenery_ = new TestMatchScenery(renderer_, board_rectangle, screen_rectangle);
+            current_scenery_ = new TestMatchScenery(assetManager_, board_rectangle, screen_rectangle);
         } else if (next_state == State::TitleScreen) {
             std::cerr << "Current State : TitleScreen\n";
             SDL_Rect screen_rectangle;
@@ -51,7 +51,7 @@ void StateMachine::update() {
             screen_rectangle.h = HEIGHT_;
 
             current_state_ = State::TitleScreen;
-            current_scenery_ = new TitleScreenScenery(renderer_, screen_rectangle);
+            current_scenery_ = new TitleScreenScenery(assetManager_, screen_rectangle);
         }
     }
 }

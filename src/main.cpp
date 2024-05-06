@@ -53,7 +53,8 @@ int main() {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-    StateMachine stateMachine(renderer, WIDTH, HEIGHT);
+    AssetManager assetManager(renderer);
+    StateMachine stateMachine(assetManager, WIDTH, HEIGHT);
 
     auto begin = std::chrono::high_resolution_clock::now();
 
