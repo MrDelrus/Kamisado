@@ -5,22 +5,14 @@ GameArbiter::GameArbiter(Arbiter& arbiter, const ArbiterViewer& arbiterViewer,
                          const SDL_Rect& board_rectangle, bool& isRunning) : arbiter_(arbiter),
                          arbiterViewer_(arbiterViewer), board_rectangle_(board_rectangle), isRunning_(isRunning) {}
 
-void GameArbiter::handle() {
-    SDL_Event e;
-    while (SDL_PollEvent(&e)) {
-        if (e.type == SDL_QUIT) {
-            isRunning_ = false;
-        }
-        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) {
-            isRunning_ = false;
-        }
-        if (e.type == SDL_MOUSEBUTTONDOWN) {
-            handle_mouse_click_();
-        }
+void GameArbiter::handle(const SDL_Event& event) {
+    if (event.type == SDL_MOUSEBUTTONDOWN) {
+        handle_mouse_click_();
     }
+
 }
 
-void GameArbiter::render() {
+void GameArbiter::render() const {
     if (isChanged_) {
         isChanged_ = false;
         arbiterViewer_.draw();

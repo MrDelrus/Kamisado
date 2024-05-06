@@ -10,7 +10,7 @@ private:
     const ArbiterViewer& arbiterViewer_;
     const SDL_Rect& board_rectangle_;
     bool& isRunning_;
-    bool isChanged_ = true;
+    mutable bool isChanged_ = true;
 
 private:
     void handle_mouse_click_();
@@ -18,8 +18,8 @@ private:
     void handle_move_result_(const Arbiter::Result&);
 public:
     GameArbiter(Arbiter&, const ArbiterViewer&, const SDL_Rect& board_rectangle, bool&);
-    void handle();
-    void render();
+    void handle(const SDL_Event& event);
+    void render() const;
 };
 
 #endif //KAMISADO_GAME_ARBITER_H

@@ -15,6 +15,11 @@ set(SOURCES src/main.cpp
         src/control/match/arbiter.cpp
         src/control/match/game_arbiter.cpp
         src/view/match/square_filler.cpp
+        src/control/states/game_state.h
+        src/control/states/test_match_scenery.cpp
+        src/control/states/state_machine.cpp
+        src/control/states/title_screen_scenery.cpp
+        src/control/states/state.h
 )
 
 find_package(SDL2 REQUIRED)
