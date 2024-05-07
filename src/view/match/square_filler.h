@@ -7,9 +7,9 @@
 class SquareFiller {
 private:
     SDL_Renderer* renderer_;
-    const SDL_Rect& board_rectangle_;
+    const SDL_Rect board_rectangle_;
 public:
-    SquareFiller(SDL_Renderer*, const SDL_Rect&);
+    SquareFiller(SDL_Renderer*, SDL_Rect);
     void draw(Position, int red, int green, int blue, int opacity) const;
 };
 

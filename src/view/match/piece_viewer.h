@@ -9,9 +9,9 @@
 class PieceViewer {
 private:
     const AssetManager& assetManager_;
-    const SDL_Rect& board_rectangle_;
+    const SDL_Rect board_rectangle_;
 public:
-    PieceViewer(const AssetManager&, const SDL_Rect&);
+    PieceViewer(const AssetManager&, SDL_Rect);
     void draw(const Piece&) const;
 };
 

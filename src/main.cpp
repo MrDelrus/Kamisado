@@ -4,7 +4,7 @@
 #include <chrono>
 #include <thread>
 
-#include "control/match/game_arbiter.h"
+#include "control/states/state_machine.h"
 
 void DeInit(int error, int step = 2) {
     if (step >= 1) {
@@ -39,18 +39,6 @@ int main() {
 
     Init();
 
-    SDL_Rect screen_rectangle;
-    screen_rectangle.x = 0;
-    screen_rectangle.y = 0;
-    screen_rectangle.w = WIDTH;
-    screen_rectangle.h = HEIGHT;
-
-    SDL_Rect board_rectangle;
-    board_rectangle.x = WIDTH / 16;
-    board_rectangle.y = HEIGHT / 16;
-    board_rectangle.w = HEIGHT - board_rectangle.y * 2;
-    board_rectangle.h = board_rectangle.w;
-
     SDL_Window* window = SDL_CreateWindow("Kamisado",
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
@@ -65,32 +53,20 @@ int main() {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-    bool isRunning = true;
-
-    Board board;
-    BoardController boardController(board);
-
     AssetManager assetManager(renderer);
-    SquareFiller squareFiller(renderer, board_rectangle);
-    PieceViewer pieceViewer(assetManager, board_rectangle);
-    BoardViewer boardViewer(assetManager, board_rectangle);
-
-    Arbiter arbiter(boardController);
-    ArbiterViewer arbiterViewer(arbiter, assetManager, boardViewer, pieceViewer, squareFiller, screen_rectangle);
-
-    GameArbiter gameArbiter(arbiter, arbiterViewer, board_rectangle, isRunning);
+    StateMachine stateMachine(assetManager, WIDTH, HEIGHT);
 
     auto begin = std::chrono::high_resolution_clock::now();
 
     int ticks = 0;
 
-    while (isRunning) {
+    while (stateMachine.running()) {
 
         auto start = std::chrono::high_resolution_clock::now();
 
-        gameArbiter.handle();
+        stateMachine.update();
         ticks += 1;
-        gameArbiter.render();
+        stateMachine.render();
 
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

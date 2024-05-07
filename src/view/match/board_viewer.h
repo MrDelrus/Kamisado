@@ -9,9 +9,9 @@
 class BoardViewer {
 private:
     const AssetManager& assetManager_;
-    const SDL_Rect& board_rectangle_;
+    const SDL_Rect board_rectangle_;
 public:
-    BoardViewer(const AssetManager&, const SDL_Rect& board_rectangle);
+    BoardViewer(const AssetManager&, SDL_Rect board_rectangle);
     void draw() const;
 };
 

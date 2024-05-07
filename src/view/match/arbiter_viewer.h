@@ -14,9 +14,9 @@ private:
     const BoardViewer& boardViewer_;
     const PieceViewer& pieceViewer_;
     const SquareFiller& squareFiller_;
-    const SDL_Rect& screen_rectangle_;
+    const SDL_Rect screen_rectangle_;
 public:
-    ArbiterViewer(const Arbiter&, const AssetManager&, const BoardViewer&, const PieceViewer&, const SquareFiller&, const SDL_Rect&);
+    ArbiterViewer(const Arbiter&, const AssetManager&, const BoardViewer&, const PieceViewer&, const SquareFiller&, SDL_Rect);
     void draw() const;
 };
 
