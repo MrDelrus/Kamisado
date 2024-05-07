@@ -18,7 +18,7 @@ private:
     GameArbiter gameArbiter_;
     State next_state = State::TestMatch;
 public:
-    TestMatchScenery(const AssetManager&, const SDL_Rect&, const SDL_Rect&);
+    TestMatchScenery(const AssetManager&, SDL_Rect, SDL_Rect);
 
     void update() override;
     void render() const override;

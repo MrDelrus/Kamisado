@@ -1,6 +1,6 @@
 #include "square_filler.h"
 
-SquareFiller::SquareFiller(SDL_Renderer* renderer, const SDL_Rect& board_rectangle) : renderer_(renderer),
+SquareFiller::SquareFiller(SDL_Renderer* renderer, SDL_Rect board_rectangle) : renderer_(renderer),
         board_rectangle_(board_rectangle) {}
 
 void SquareFiller::draw(Position position, int red, int green, int blue, int alpha) const {

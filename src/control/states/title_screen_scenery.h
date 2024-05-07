@@ -7,10 +7,11 @@
 class TitleScreenScenery : public GameState {
 private:
     const AssetManager& assetManager_;
-    const SDL_Rect& screen_rectangle_;
+    const SDL_Rect screen_rectangle_;
     State next_state = State::TitleScreen;
+    mutable bool isChanged_ = true;
 public:
-    TitleScreenScenery(const AssetManager&, const SDL_Rect&);
+    TitleScreenScenery(const AssetManager&, SDL_Rect);
 
     void update() override;
     void render() const override;

@@ -1,7 +1,7 @@
 #include "title_screen_scenery.h"
 #include <iostream>
 
-TitleScreenScenery::TitleScreenScenery(const AssetManager& assetManager, const SDL_Rect& screen_rectangle) :
+TitleScreenScenery::TitleScreenScenery(const AssetManager& assetManager, SDL_Rect screen_rectangle) :
         assetManager_(assetManager), screen_rectangle_(screen_rectangle) {}
 
 void TitleScreenScenery::update() {
@@ -20,12 +20,13 @@ void TitleScreenScenery::update() {
 }
 
 void TitleScreenScenery::render() const {
-    SDL_Renderer* renderer = assetManager_.get_renderer();
-    SDL_RenderClear(renderer);
-    std::cerr << "Rendering title screen\t";
-    SDL_RenderCopy(renderer, assetManager_.get_title_screen_image(), nullptr, &screen_rectangle_);
-    std::cerr << "Done\n";
-    SDL_RenderPresent(renderer);
+    if (isChanged_) {
+        isChanged_ = false;
+        SDL_Renderer* renderer = assetManager_.get_renderer();
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, assetManager_.get_title_screen_image(), nullptr, &screen_rectangle_);
+        SDL_RenderPresent(renderer);
+    }
 }
 
 State TitleScreenScenery::get_current_state() const {

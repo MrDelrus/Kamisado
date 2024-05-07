@@ -1,6 +1,6 @@
 #include "board_viewer.h"
 
-BoardViewer::BoardViewer(const AssetManager& assetManager, const SDL_Rect& board_rectangle)
+BoardViewer::BoardViewer(const AssetManager& assetManager, SDL_Rect board_rectangle)
                          : assetManager_(assetManager), board_rectangle_(board_rectangle) {}
 
 void BoardViewer::draw() const {

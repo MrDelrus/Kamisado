@@ -1,6 +1,6 @@
 #include "piece_viewer.h"
 
-PieceViewer::PieceViewer(const AssetManager& assetManager, const SDL_Rect& board_rectangle) : assetManager_(assetManager),
+PieceViewer::PieceViewer(const AssetManager& assetManager, SDL_Rect board_rectangle) : assetManager_(assetManager),
         board_rectangle_(board_rectangle) {}
 
 void PieceViewer::draw(const Piece& piece) const {

@@ -2,7 +2,7 @@
 #include <iostream>
 
 GameArbiter::GameArbiter(Arbiter& arbiter, const ArbiterViewer& arbiterViewer,
-                         const SDL_Rect& board_rectangle, bool& isRunning) : arbiter_(arbiter),
+                         SDL_Rect board_rectangle, bool& isRunning) : arbiter_(arbiter),
                          arbiterViewer_(arbiterViewer), board_rectangle_(board_rectangle), isRunning_(isRunning) {}
 
 void GameArbiter::handle(const SDL_Event& event) {

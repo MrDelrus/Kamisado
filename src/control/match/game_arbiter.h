@@ -8,7 +8,7 @@ class GameArbiter {
 private:
     Arbiter& arbiter_;
     const ArbiterViewer& arbiterViewer_;
-    const SDL_Rect& board_rectangle_;
+    SDL_Rect board_rectangle_;
     bool& isRunning_;
     mutable bool isChanged_ = true;
 
@@ -17,7 +17,7 @@ private:
     Arbiter::Result move_to_position_(const Position&);
     void handle_move_result_(const Arbiter::Result&);
 public:
-    GameArbiter(Arbiter&, const ArbiterViewer&, const SDL_Rect& board_rectangle, bool&);
+    GameArbiter(Arbiter&, const ArbiterViewer&, SDL_Rect, bool&);
     void handle(const SDL_Event& event);
     void render() const;
 };

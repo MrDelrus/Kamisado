@@ -1,7 +1,7 @@
 #include "test_match_scenery.h"
 
-TestMatchScenery::TestMatchScenery(const AssetManager& assetManager, const SDL_Rect& board_rectangle,
-        const SDL_Rect& screen_rectangle) : isRunning_(true), boardController_(board_), assetManager_(assetManager),
+TestMatchScenery::TestMatchScenery(const AssetManager& assetManager, SDL_Rect board_rectangle,
+        SDL_Rect screen_rectangle) : isRunning_(true), boardController_(board_), assetManager_(assetManager),
         squareFiller_(assetManager_.get_renderer(), board_rectangle), pieceViewer_(assetManager_, board_rectangle),
         boardViewer_(assetManager_, board_rectangle), arbiter_(boardController_),
         arbiterViewer_(arbiter_, assetManager_, boardViewer_, pieceViewer_, squareFiller_, screen_rectangle),

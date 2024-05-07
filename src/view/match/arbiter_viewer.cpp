@@ -2,7 +2,7 @@
 
 ArbiterViewer::ArbiterViewer(const Arbiter& arbiter, const AssetManager& assetManager, const BoardViewer& boardViewer,
                              const PieceViewer& pieceViewer, const SquareFiller& squareFiller,
-                             const SDL_Rect& screen_rectangle) : arbiter_(arbiter), assetManager_(assetManager),
+                             SDL_Rect screen_rectangle) : arbiter_(arbiter), assetManager_(assetManager),
                              boardViewer_(boardViewer), pieceViewer_(pieceViewer), squareFiller_(squareFiller),
                              screen_rectangle_(screen_rectangle) {}
 
