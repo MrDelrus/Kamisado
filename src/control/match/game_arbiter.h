@@ -2,24 +2,27 @@
 #define KAMISADO_GAME_ARBITER_H
 
 #include "arbiter.h"
+#include "../players/match_player.h"
 #include "../../view/match/arbiter_viewer.h"
 
 class GameArbiter {
 private:
-    Arbiter& arbiter_;
-    const ArbiterViewer& arbiterViewer_;
-    SDL_Rect board_rectangle_;
-    bool& isRunning_;
-    mutable bool isChanged_ = true;
-
+    using Result = MatchPlayer::Result;
 private:
-    void handle_mouse_click_();
-    Arbiter::Result move_to_position_(const Position&);
-    void handle_move_result_(const Arbiter::Result&);
+    MatchPlayer& player1_;
+    MatchPlayer& player2_;
+    Board& board_;
+    Color current_color_;
+    Player current_player_ = Player::First;
+    bool is_first_move_ = true;
+    bool& is_running_;
+private:
+    Result move_to_position_(Position, Position);
+    bool validate_(Position, Position);
+    void handle_move_result_(Result);
 public:
-    GameArbiter(Arbiter&, const ArbiterViewer&, SDL_Rect, bool&);
-    void handle(const SDL_Event& event);
-    void render() const;
+    GameArbiter(MatchPlayer&, MatchPlayer&, Board&, bool&);
+    void update();
 };
 
 #endif //KAMISADO_GAME_ARBITER_H
