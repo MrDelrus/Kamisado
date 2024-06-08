@@ -3,8 +3,8 @@
 #include "../players/fen.cpp"
 #include <cassert>
 
-GameArbiter::GameArbiter(MatchPlayer& player1, MatchPlayer& player2, Board& board, bool& is_running) :
-    player1_(player1), player2_(player2), board_(board), is_running_(is_running) {
+GameArbiter::GameArbiter(MatchPlayer& player1, MatchPlayer& player2, Board& board) : player1_(player1),
+    player2_(player2), board_(board) {
     player1_.pass_position(get_fen(board_));
 }
 
@@ -106,7 +106,7 @@ bool GameArbiter::validate_(Position from, Position to) {
 
 }
 
-void GameArbiter::update() {
+std::string GameArbiter::update() {
     MatchPlayer* current = &player1_;
     MatchPlayer* opponent = &player2_;
     if (current_player_ == Player::Second) {
@@ -114,6 +114,15 @@ void GameArbiter::update() {
     }
     if (current->is_move_made()) {
         std::string move_fen = current->get_move();
+        if (move_fen == "CONCEDE" || move_fen == "QUIT") {
+            current->pass_game_result(Result::Defeat);
+            opponent->pass_game_result(Result::Victory);
+            if (move_fen == "CONCEDE") {
+                return "END";
+            } else {
+                return "QUIT";
+            }
+        }
         assert(move_fen.size() == 5);
         assert(move_fen[2] == '-');
         Position from = {move_fen[0] - 'a', move_fen[1] - '0'};
@@ -124,7 +133,6 @@ void GameArbiter::update() {
             }
             auto result = move_to_position_(from, to);
             if (result != Result::Success) {
-                is_running_ = false;
                 if (result == Result::Victory) {
                     current->pass_game_result(Result::Victory);
                     opponent->pass_game_result(Result::Defeat);
@@ -132,12 +140,13 @@ void GameArbiter::update() {
                     current->pass_game_result(Result::Defeat);
                     opponent->pass_game_result(Result::Victory);
                 }
-            }
-            if (is_running_) {
+                return "END";
+            } else {
                 opponent->pass_position(get_fen(board_));
             }
         } else {
             current->pass_position(get_fen(board_));
         }
     }
+    return "";
 }

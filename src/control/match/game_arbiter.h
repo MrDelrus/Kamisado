@@ -15,13 +15,12 @@ private:
     Color current_color_;
     Player current_player_ = Player::First;
     bool is_first_move_ = true;
-    bool& is_running_;
 private:
     Result move_to_position_(Position, Position);
     bool validate_(Position, Position);
 public:
-    GameArbiter(MatchPlayer&, MatchPlayer&, Board&, bool&);
-    void update();
+    GameArbiter(MatchPlayer&, MatchPlayer&, Board&);
+    std::string update();
 };
 
 #endif //KAMISADO_GAME_ARBITER_H

@@ -20,6 +20,9 @@ set(SOURCES src/main.cpp
         src/control/states/state_machine.cpp
         src/control/states/title_screen_scenery.cpp
         src/control/states/state.h
+        src/control/players/fen.cpp
+        src/control/players/match_player.h
+        src/control/players/project_runner_player.cpp
 )
 
 find_package(SDL2 REQUIRED)
