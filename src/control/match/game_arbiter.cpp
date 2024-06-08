@@ -106,13 +106,6 @@ bool GameArbiter::validate_(Position from, Position to) {
 
 }
 
-void GameArbiter::handle_move_result_(Result result) {
-    if (result != Result::Success) {
-        is_running_ = false;
-        player1_.get_game_result(result);
-    }
-}
-
 void GameArbiter::update() {
     MatchPlayer* current = &player1_;
     MatchPlayer* opponent = &player2_;
@@ -133,16 +126,18 @@ void GameArbiter::update() {
             if (result != Result::Success) {
                 is_running_ = false;
                 if (result == Result::Victory) {
-                    current->get_game_result(Result::Victory);
-                    opponent->get_game_result(Result::Defeat);
+                    current->pass_game_result(Result::Victory);
+                    opponent->pass_game_result(Result::Defeat);
                 } else {
-                    current->get_game_result(Result::Defeat);
-                    opponent->get_game_result(Result::Victory);
+                    current->pass_game_result(Result::Defeat);
+                    opponent->pass_game_result(Result::Victory);
                 }
             }
             if (is_running_) {
                 opponent->pass_position(get_fen(board_));
             }
+        } else {
+            current->pass_position(get_fen(board_));
         }
     }
 }

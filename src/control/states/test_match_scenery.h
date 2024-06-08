@@ -3,17 +3,18 @@
 
 #include "game_state.h"
 #include "../match/game_arbiter.h"
+#include "../players/project_runner_player.h"
 
 class TestMatchScenery : public GameState {
 private:
     bool isRunning_;
     Board board_;
-    BoardController boardController_;
+    ProjectRunnerPlayer player1_;
+    ProjectRunnerPlayer player2_;
     const AssetManager& assetManager_;
     SquareFiller squareFiller_;
     PieceViewer pieceViewer_;
     BoardViewer boardViewer_;
-    Arbiter arbiter_;
     ArbiterViewer arbiterViewer_;
     GameArbiter gameArbiter_;
     State next_state = State::TestMatch;

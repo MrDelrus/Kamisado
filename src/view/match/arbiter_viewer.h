@@ -9,14 +9,14 @@
 
 class ArbiterViewer {
 private:
-    const Arbiter& arbiter_;
+    const Board& board_;
     const AssetManager& assetManager_;
     const BoardViewer& boardViewer_;
     const PieceViewer& pieceViewer_;
     const SquareFiller& squareFiller_;
     const SDL_Rect screen_rectangle_;
 public:
-    ArbiterViewer(const Arbiter&, const AssetManager&, const BoardViewer&, const PieceViewer&, const SquareFiller&, SDL_Rect);
+    ArbiterViewer(const Board&, const AssetManager&, const BoardViewer&, const PieceViewer&, const SquareFiller&, SDL_Rect);
     void draw() const;
 };
 

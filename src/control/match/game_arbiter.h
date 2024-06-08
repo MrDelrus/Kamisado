@@ -19,7 +19,6 @@ private:
 private:
     Result move_to_position_(Position, Position);
     bool validate_(Position, Position);
-    void handle_move_result_(Result);
 public:
     GameArbiter(MatchPlayer&, MatchPlayer&, Board&, bool&);
     void update();
