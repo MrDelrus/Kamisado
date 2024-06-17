@@ -29,7 +29,7 @@ std::string ProjectRunnerPlayer::handle_mouse_click_(int x, int y) {
 }
 
 
-void ProjectRunnerPlayer::pass_position(std::string&& fen) {
+void ProjectRunnerPlayer::set_position(std::string&& fen) {
     fen_ = std::move(fen);
     if (fen_.back() == '#') {
         is_first_turn_ = true;
@@ -58,6 +58,6 @@ std::string ProjectRunnerPlayer::get_move() {
     return move_;
 }
 
-void ProjectRunnerPlayer::pass_game_result(Result) {
+void ProjectRunnerPlayer::set_game_result(Result) {
 
 }

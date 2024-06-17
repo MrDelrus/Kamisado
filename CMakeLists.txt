@@ -23,6 +23,7 @@ set(SOURCES src/main.cpp
         src/control/players/fen.cpp
         src/control/players/match_player.h
         src/control/players/project_runner_player.cpp
+        src/control/players/fen.h
 )
 
 find_package(SDL2 REQUIRED)

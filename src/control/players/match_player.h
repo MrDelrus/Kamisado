@@ -11,10 +11,10 @@ public:
         Victory,
         Defeat
     };
-    virtual void pass_position(std::string&&) = 0;
+    virtual void set_position(std::string&&) = 0;
     virtual bool is_move_made() = 0;
     virtual std::string get_move() = 0;
-    virtual void pass_game_result(Result);
+    virtual void set_game_result(Result) = 0;
 
     virtual ~MatchPlayer() = default;
 };

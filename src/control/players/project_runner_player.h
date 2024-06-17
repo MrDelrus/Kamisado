@@ -18,10 +18,10 @@ private:
     std::string handle_mouse_click_(int x, int y);
 public:
     ProjectRunnerPlayer(SDL_Rect board_rectangle);
-    virtual void pass_position(std::string&&) override;
+    virtual void set_position(std::string&&) override;
     virtual bool is_move_made() override;
     virtual std::string get_move() override;
-    virtual void pass_game_result(Result) override;
+    virtual void set_game_result(Result) override;
     ~ProjectRunnerPlayer() override = default;
 };
 

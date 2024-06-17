@@ -26,6 +26,7 @@ public:
 
     State get_current_state() const override;
     State get_next_state() const override;
+    ~TestMatchScenery() override = default;
 };
 
 #endif //KAMISADO_TEST_MATCH_SCENERY_H

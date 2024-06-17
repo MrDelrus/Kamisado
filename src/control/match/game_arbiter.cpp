@@ -1,11 +1,10 @@
 #include "game_arbiter.h"
-#include <iostream>
-#include "../players/fen.cpp"
+#include "../players/fen.h"
 #include <cassert>
 
 GameArbiter::GameArbiter(MatchPlayer& player1, MatchPlayer& player2, Board& board) : player1_(player1),
     player2_(player2), board_(board) {
-    player1_.pass_position(get_fen(board_));
+    player1_.set_position(get_fen(board_));
 }
 
 GameArbiter::Result GameArbiter::move_to_position_(Position from, Position to) {
@@ -115,8 +114,8 @@ std::string GameArbiter::update() {
     if (current->is_move_made()) {
         std::string move_fen = current->get_move();
         if (move_fen == "CONCEDE" || move_fen == "QUIT") {
-            current->pass_game_result(Result::Defeat);
-            opponent->pass_game_result(Result::Victory);
+            current->set_game_result(Result::Defeat);
+            opponent->set_game_result(Result::Victory);
             if (move_fen == "CONCEDE") {
                 return "END";
             } else {
@@ -134,18 +133,18 @@ std::string GameArbiter::update() {
             auto result = move_to_position_(from, to);
             if (result != Result::Success) {
                 if (result == Result::Victory) {
-                    current->pass_game_result(Result::Victory);
-                    opponent->pass_game_result(Result::Defeat);
+                    current->set_game_result(Result::Victory);
+                    opponent->set_game_result(Result::Defeat);
                 } else {
-                    current->pass_game_result(Result::Defeat);
-                    opponent->pass_game_result(Result::Victory);
+                    current->set_game_result(Result::Defeat);
+                    opponent->set_game_result(Result::Victory);
                 }
                 return "END";
             } else {
-                opponent->pass_position(get_fen(board_));
+                opponent->set_position(get_fen(board_));
             }
         } else {
-            current->pass_position(get_fen(board_));
+            current->set_position(get_fen(board_));
         }
     }
     return "";
