@@ -1,0 +1,8 @@
+#ifndef KAMISADO_APPLIFECYCLEEVENT_H
+#define KAMISADO_APPLIFECYCLEEVENT_H
+
+enum class AppLifeCycleEvent {
+    Quit
+};
+
+#endif //KAMISADO_APPLIFECYCLEEVENT_H

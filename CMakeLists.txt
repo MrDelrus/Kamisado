@@ -23,7 +23,17 @@ set(SOURCES src/main.cpp
         src/control/players/fen.cpp
         src/control/players/match_player.h
         src/control/players/project_runner_player.cpp
-        src/control/players/fen.h
+        src/control/event_handlers/SDL_EventHandler.cpp
+        src/control/event_handlers/SDL_EventHandler.h
+        src/control/event_handlers/AppLifeCycleEventHandler.cpp
+        src/control/event_handlers/AppLifeCycleEventHandler.h
+        src/control/events/AppLifeCycleEvent.h
+        src/control/event_handlers/SceneryEventHandler.h
+        src/control/event_handlers/TestMatchSceneryEventHandler.cpp
+        src/control/event_handlers/TestMatchSceneryEventHandler.h
+        src/control/event_handlers/BoardClickEventHandler.cpp
+        src/control/event_handlers/BoardClickEventHandler.h
+        src/control/events/SceneryEvent.h
 )
 
 find_package(SDL2 REQUIRED)
