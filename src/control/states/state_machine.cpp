@@ -1,4 +1,3 @@
-#include <iostream>
 #include "state_machine.h"
 
 StateMachine::StateMachine(const AssetManager& assetManager, int width, int height) : assetManager_(assetManager),
@@ -63,4 +62,10 @@ bool StateMachine::running() const {
 
 StateMachine::~StateMachine() {
     delete current_scenery_;
+}
+
+void StateMachine::finish_() {
+    delete current_scenery_;
+    current_scenery_ = nullptr;
+    current_state_ = State::Quit;
 }

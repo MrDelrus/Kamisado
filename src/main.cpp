@@ -4,7 +4,9 @@
 #include <chrono>
 #include <thread>
 
+#include "control/event_transmitters/SceneryEventTransmitter.h"
 #include "control/states/state_machine.h"
+#include "control/event_handlers/SDL_EventHandler.h"
 
 void DeInit(int error, int step = 2) {
     if (step >= 1) {
@@ -56,6 +58,10 @@ int main() {
     AssetManager assetManager(renderer);
     StateMachine stateMachine(assetManager, WIDTH, HEIGHT);
 
+    SceneryEventTransmitter sceneryEventTransmitter(stateMachine);
+    AppLifeCycleEventHandler appLifeCycleEventHandler(sceneryEventTransmitter);
+    SDL_EventHandler sdlEventHandler(appLifeCycleEventHandler, sceneryEventTransmitter);
+
     auto begin = std::chrono::high_resolution_clock::now();
 
     int ticks = 0;
@@ -64,6 +70,7 @@ int main() {
 
         auto start = std::chrono::high_resolution_clock::now();
 
+        sdlEventHandler.update();
         stateMachine.update();
         ticks += 1;
         stateMachine.render();

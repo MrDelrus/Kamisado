@@ -2,16 +2,16 @@
 #define KAMISADO_SDL_EVENTHANDLER_H
 
 #include "AppLifeCycleEventHandler.h"
-#include "SceneryEventHandler.h"
+#include "../event_transmitters/SceneryEventTransmitter.h"
 #include <SDL.h>
 
 class SDL_EventHandler {
 private:
    AppLifeCycleEventHandler& appLifeCycleEventHandler_;
-   SceneryEventHandler* sceneryEventHandler_ = nullptr;
+   SceneryEventTransmitter& sceneryEventTransmitter_;
 public:
-    explicit SDL_EventHandler(AppLifeCycleEventHandler&, SceneryEventHandler*);
-    void handle();
+    SDL_EventHandler(AppLifeCycleEventHandler&, SceneryEventTransmitter&);
+    void update();
 };
 
 #endif //KAMISADO_SDL_EVENTHANDLER_H

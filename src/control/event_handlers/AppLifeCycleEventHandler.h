@@ -2,11 +2,13 @@
 #define KAMISADO_APPLIFECYCLEEVENTHANDLER_H
 
 #include "../events/AppLifeCycleEvent.h"
+#include "../event_transmitters/SceneryEventTransmitter.h"
 
 class AppLifeCycleEventHandler {
 private:
-    //SceneryEventTransmitter& sceneryEventTransmitter_;
+    SceneryEventTransmitter& sceneryEventTransmitter_;
 public:
+    AppLifeCycleEventHandler(SceneryEventTransmitter&);
     void handle(AppLifeCycleEvent event);
 };
 

@@ -19,6 +19,10 @@ public:
     void render() const;
     bool running() const;
     ~StateMachine();
+private:
+    void finish_();
+
+    friend class SceneryEventTransmitter;
 };
 
 #endif //KAMISADO_STATE_MACHINE_H
