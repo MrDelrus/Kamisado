@@ -4,9 +4,9 @@
 #include <chrono>
 #include <thread>
 
-#include "control/event_transmitters/SceneryEventTransmitter.h"
-#include "control/states/state_machine.h"
-#include "control/event_handlers/SDL_EventHandler.h"
+#include "control/eventTransmitters//SceneryEventTransmitter.h"
+#include "control/states/StateMachine.h"
+#include "control/eventHandlers//SDL_EventHandler.h"
 
 void DeInit(int error, int step = 2) {
     if (step >= 1) {

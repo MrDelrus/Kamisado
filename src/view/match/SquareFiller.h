@@ -1,0 +1,16 @@
+#ifndef KAMISADO_SQUAREFILLER_H
+#define KAMISADO_SQUAREFILLER_H
+
+#include <SDL.h>
+#include "../../model/match/Piece.h"
+
+class SquareFiller {
+private:
+    SDL_Renderer* renderer_;
+    const SDL_Rect board_rectangle_;
+public:
+    SquareFiller(SDL_Renderer*, SDL_Rect);
+    void draw(Position, int red, int green, int blue, int opacity) const;
+};
+
+#endif //KAMISADO_SQUAREFILLER_H

@@ -5,32 +5,33 @@ project(Kamisado)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCES src/main.cpp
-        src/model/match/piece.cpp
-        src/model/match/board.cpp
-        src/view/match/board_viewer.cpp
-        src/view/match/arbiter_viewer.cpp
-        src/view/match/asset_manager.cpp
-        src/view/match/piece_viewer.cpp
-        src/control/match/board_controller.cpp
-        src/control/match/arbiter.cpp
-        src/control/match/game_arbiter.cpp
-        src/view/match/square_filler.cpp
-        src/control/states/game_state.h
-        src/control/states/test_match_scenery.cpp
-        src/control/states/state_machine.cpp
-        src/control/states/title_screen_scenery.cpp
-        src/control/states/state.h
+        src/model/match/Piece.cpp
+        src/model/match/Board.cpp
+        src/view/match/BoardViewer.cpp
+        src/view/match/ArbiterViewer.cpp
+        src/view/match/AssetManager.cpp
+        src/view/match/PieceViewer.cpp
+        src/control/match/BoardController.cpp
+        src/control/match/Arbiter.cpp
+        src/control/match/GameArbiter.cpp
+        src/view/match/SquareFiller.cpp
+        src/control/states/GameState.h
+        src/control/states/TestMatchScenery.cpp
+        src/control/states/StateMachine.cpp
+        src/control/states/TitleScreenScenery.cpp
+        src/control/states/State.h
         src/control/players/fen.cpp
-        src/control/players/match_player.h
-        src/control/players/project_runner_player.cpp
-        src/control/event_handlers/SDL_EventHandler.cpp
-        src/control/event_handlers/AppLifeCycleEventHandler.cpp
+        src/control/players/MatchPlayer.h
+        src/control/players/ProjectRunnerPlayer.cpp
+        src/control/eventHandlers/SDL_EventHandler.cpp
+        src/control/eventHandlers/AppLifeCycleEventHandler.cpp
         src/control/events/AppLifeCycleEvent.h
-        src/control/event_handlers/SceneryEventHandler.h
-        src/control/event_handlers/TestMatchSceneryEventHandler.cpp
-        src/control/event_handlers/BoardClickEventHandler.cpp
+        src/control/eventHandlers/SceneryEventHandler.h
+        src/control/eventHandlers/TestMatchSceneryEventHandler.cpp
+        src/control/eventHandlers/BoardClickEventHandler.cpp
         src/control/events/SceneryEvent.h
-        src/control/event_transmitters/SceneryEventTransmitter.cpp
+        src/control/eventTransmitters/SceneryEventTransmitter.cpp
+        src/control/eventHandlers/TitleScreenSceneryEventHandler.cpp
 )
 
 find_package(SDL2 REQUIRED)
