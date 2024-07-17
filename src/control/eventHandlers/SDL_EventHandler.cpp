@@ -11,11 +11,18 @@ void SDL_EventHandler::update() {
         if (event.type == SDL_QUIT) {
             std::cerr << "QUIT" << std::endl;
             appLifeCycleEventHandler_.handle(AppLifeCycleEvent::Quit);
-        } else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
-            SceneryEvent sceneryEvent;
-            sceneryEvent.is_click = false;
-            sceneryEvent.key = -1;
-            sceneryEventTransmitter_.handle(sceneryEvent);
+        } else if (event.type == SDL_KEYDOWN) {
+            if (event.key.keysym.sym == SDLK_ESCAPE) {
+                SceneryEvent sceneryEvent;
+                sceneryEvent.is_click = false;
+                sceneryEvent.key = SceneryEvent::Key::Escape;
+                sceneryEventTransmitter_.handle(sceneryEvent);
+            } else if (event.key.keysym.sym == SDLK_RETURN) {
+                SceneryEvent sceneryEvent;
+                sceneryEvent.is_click = false;
+                sceneryEvent.key = SceneryEvent::Key::Enter;
+                sceneryEventTransmitter_.handle(sceneryEvent);
+            }
         } else if (event.type == SDL_MOUSEBUTTONDOWN) {
             SceneryEvent sceneryEvent;
             sceneryEvent.x_click = event.button.x;

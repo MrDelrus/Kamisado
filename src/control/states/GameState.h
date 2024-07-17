@@ -13,6 +13,8 @@ public:
     virtual State get_next_state() const = 0;
 
     virtual ~GameState() = default;
+private:
+    virtual void set_next_state_(State) = 0;
 };
 
 #endif //KAMISADO_GAMESTATE_H

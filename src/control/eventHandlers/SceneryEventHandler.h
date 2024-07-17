@@ -6,6 +6,8 @@
 class SceneryEventHandler {
 public:
     virtual void handle(SceneryEvent) = 0;
+
+    virtual ~SceneryEventHandler() = default;
 };
 
 #endif //KAMISADO_SCENERYEVENTHANDLER_H

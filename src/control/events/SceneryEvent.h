@@ -4,7 +4,11 @@
 struct SceneryEvent {
     int x_click;
     int y_click;
-    int key;
+    enum class Key {
+        Escape,
+        Enter
+    };
+    Key key;
     bool is_click;
 };
 

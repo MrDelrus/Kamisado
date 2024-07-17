@@ -1,10 +1,10 @@
 #include "TitleScreenScenery.h"
 
-TitleScreenScenery::TitleScreenScenery(const AssetManager& assetManager, SDL_Rect screen_rectangle,
-        SDL_Rect start_button_rectangle_) : assetManager_(assetManager), screen_rectangle_(screen_rectangle),
-        start_button_rectangle_(start_button_rectangle_) {}
+TitleScreenScenery::TitleScreenScenery(const AssetManager& assetManager, SDL_Rect screen_rectangle)
+    : assetManager_(assetManager), screen_rectangle_(screen_rectangle) {}
 
 void TitleScreenScenery::update() {
+    /*
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
@@ -16,7 +16,7 @@ void TitleScreenScenery::update() {
                 set_next_state_(State::TestMatch);
             }
         }
-    }
+    } */
 }
 
 void TitleScreenScenery::render() const {

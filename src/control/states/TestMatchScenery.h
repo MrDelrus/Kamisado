@@ -29,7 +29,7 @@ public:
     State get_next_state() const override;
     ~TestMatchScenery() override = default;
 private:
-    void set_next_state_(State state);
+    void set_next_state_(State state) override;
 
     friend class TestMatchSceneryEventHandler;
 };
