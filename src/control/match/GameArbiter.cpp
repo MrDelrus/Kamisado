@@ -1,5 +1,5 @@
 #include "GameArbiter.h"
-#include "../players/fen.h"
+#include "../positionConverters/fen.h"
 #include <cassert>
 
 GameArbiter::GameArbiter(MatchPlayer& player1, MatchPlayer& player2, Board& board) : player1_(player1),

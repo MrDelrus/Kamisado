@@ -1,15 +1,12 @@
-#include <string>
-
 #include "fen.h"
 
-std::string get_fen(const Board& board, Position from) {
+positionInformation get_fen(const Board& board, Position from) {
     /*
      Returns string with length 67. First 64 letters represent the board ('.' if cell is empty, 'x' if black piece is
      here and 'X' if white piece is here). 65th symbol is '#' and last 2 represent the current piece, or '#'
      */
     auto pieces = board.get_pieces();
     auto char_from_piece = [] (const Piece&) {
-        // TODO
         return 'x';
     };
     std::string fen(67, '.');

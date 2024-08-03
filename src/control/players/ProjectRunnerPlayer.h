@@ -15,7 +15,7 @@ private:
     bool is_first_turn_ = false;
 private:
     bool is_movable_(Position from, Position to);
-    std::string handle_mouse_click_(int x, int y);
+    std::string handle_(int x, int y);
 public:
     ProjectRunnerPlayer(SDL_Rect board_rectangle);
     virtual void set_position(std::string&&) override;

@@ -7,7 +7,7 @@ class BoardController {
 private:
     Board& board_;
 public:
-    BoardController(Board&);
+    explicit BoardController(Board&);
 
     Board& get_board();
     const Board& get_board() const;

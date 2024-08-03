@@ -20,7 +20,7 @@ set(SOURCES src/main.cpp
         src/control/states/StateMachine.cpp
         src/control/states/TitleScreenScenery.cpp
         src/control/states/State.h
-        src/control/players/fen.cpp
+        src/control/positionConverters/fen.cpp
         src/control/players/MatchPlayer.h
         src/control/players/ProjectRunnerPlayer.cpp
         src/control/eventHandlers/SDL_EventHandler.cpp
@@ -32,6 +32,7 @@ set(SOURCES src/main.cpp
         src/control/events/SceneryEvent.h
         src/control/eventTransmitters/SceneryEventTransmitter.cpp
         src/control/eventHandlers/TitleScreenSceneryEventHandler.cpp
+        src/control/positionConverters/turnInformation.h
 )
 
 find_package(SDL2 REQUIRED)
