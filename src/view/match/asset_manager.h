@@ -5,17 +5,19 @@
 #include <SDL2/SDL_image.h>
 #include "../../model/match/piece.h"
 
+#include <filesystem>
 #include <vector>
 
 class AssetManager {
 private:
+    std::string path_;
     SDL_Renderer* renderer_;
     std::vector<std::vector<SDL_Texture*>> pieces_images_;
     SDL_Texture* background_image_;
     SDL_Texture* board_image_;
     SDL_Texture* title_screen_image_;
 public:
-    AssetManager(SDL_Renderer*);
+    AssetManager(std::filesystem::path, SDL_Renderer*);
     SDL_Renderer* get_renderer() const;
     const std::vector<std::vector<SDL_Texture*>>& get_pieces_images() const;
     SDL_Texture* get_background_image() const;

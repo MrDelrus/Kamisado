@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <chrono>
 #include <thread>
+#include <filesystem>
 
 #include "control/states/state_machine.h"
 
@@ -53,7 +54,7 @@ int main() {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-    AssetManager assetManager(renderer);
+    AssetManager assetManager(std::filesystem::current_path(), renderer);
     StateMachine stateMachine(assetManager, WIDTH, HEIGHT);
 
     auto begin = std::chrono::high_resolution_clock::now();

@@ -1,46 +1,48 @@
 #include "asset_manager.h"
 
-AssetManager::AssetManager(SDL_Renderer* renderer)
-        : renderer_(renderer), pieces_images_(2, std::vector<SDL_Texture*>(8)),
-          background_image_(IMG_LoadTexture(
-                  renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/game-background.png")),
-          board_image_(IMG_LoadTexture(
-                  renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/board.png")),
-          title_screen_image_(IMG_LoadTexture(
-                  renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/main-background.png")) {
+AssetManager::AssetManager(std::filesystem::path path, SDL_Renderer* renderer)
+        : path_(path.string() + "/assets/images/")
+        , renderer_(renderer)
+        , pieces_images_(2, std::vector<SDL_Texture*>(8))
+        , background_image_(IMG_LoadTexture(
+                  renderer_, (path_ + "game-background.png").data()))
+        , board_image_(IMG_LoadTexture(
+                  renderer_, (path_ + "board.png").data()))
+        , title_screen_image_(IMG_LoadTexture(
+                  renderer_, (path_ + "main-background.png").data())) {
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Brown)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/brown-1.png");
+            (path_ + "pieces/player1-v0/brown-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Darkblue)] = IMG_LoadTexture(
-            renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/darkblue-1.png");
+            renderer_, (path_ + "pieces/player1-v0/darkblue-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Green)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/green-1.png");
+            (path_ + "pieces/player1-v0/green-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Lightblue)] = IMG_LoadTexture(
-            renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/lightblue-1.png");
+            renderer_, (path_ + "pieces/player1-v0/lightblue-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Orange)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/orange-1.png");
+            (path_ + "pieces/player1-v0/orange-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Pink)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/pink-1.png");
+            (path_ + "pieces/player1-v0/pink-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Red)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/red-1.png");
+            (path_ + "pieces/player1-v0/red-1.png").data());
     pieces_images_[static_cast<int8_t>(Player::First)][static_cast<int8_t>(Color::Yellow)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player1-v0/yellow-1.png");
+            (path_ + "pieces/player1-v0/yellow-1.png").data());
 
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Brown)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/brown-2.png");
+            (path_ + "pieces/player2-v0/brown-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Darkblue)] = IMG_LoadTexture(
-            renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/darkblue-2.png");
+            renderer_, (path_ + "pieces/player2-v0/darkblue-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Green)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/green-2.png");
+            (path_ + "pieces/player2-v0/green-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Lightblue)] = IMG_LoadTexture(
-            renderer_, "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/lightblue-2.png");
+            renderer_, (path_ + "pieces/player2-v0/lightblue-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Orange)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/orange-2.png");
+            (path_ + "pieces/player2-v0/orange-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Pink)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/pink-2.png");
+            (path_ + "pieces/player2-v0/pink-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Red)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/red-2.png");
+            (path_ + "pieces/player2-v0/red-2.png").data());
     pieces_images_[static_cast<int8_t>(Player::Second)][static_cast<int8_t>(Color::Yellow)] = IMG_LoadTexture(renderer_,
-            "/home/mrdelrus/Programming/MyProjects/Kamisado/assets/images/pieces/player2-v0/yellow-2.png");
+            (path_ + "pieces/player2-v0/yellow-2.png").data());
 }
 
 SDL_Renderer* AssetManager::get_renderer() const {
